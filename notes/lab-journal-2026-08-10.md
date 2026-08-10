@@ -508,6 +508,44 @@ quotable. **PR: at 5M chars the val-chosen config's test bpc < 2.37**
 (a ≥0.02 margin — matched parameters, no feature training, same data
 budget, better bpc).
 
+## Finding 8 — The Llama grows no tree: a future manifold (which-tree run)
+
+Verdicts against the brief's pre-registered thresholds:
+
+- **PR-A (future beats past at mid layers): CONFIRMED at L12
+  (diff +0.317, CI [+0.298, +0.335]), marginal at L8 (+0.095, CI
+  [+0.074, +0.114] — excludes zero, straddles the 0.10 line). The
+  layer-1 reversal: FALSIFIED — the future wins at L1 TOO (+0.166 vs
+  +0.059, CI [+0.086, +0.128]).** The transformer is future-keyed at
+  every depth, embedding-adjacent layers included (distributional
+  embeddings are already predictive objects).
+- **PR-B (monotone trends): FALSIFIED as stated.** raw_s is flat and
+  tiny (~0.08) at all layers — there is no past tree to shed. raw_pext
+  is non-monotone: 0.17 (L1) → dip 0.09 (L4) → peak 0.37 (L12) → 0.32
+  (L14), with the mechanical ceiling at 0.40 (L15).
+- **PR-C (tree gates): OUTCOME (d).** Cophenetic at L12 = 0.684 vs
+  coordinate-shuffled null 0.687 — the state cloud has NO hierarchical
+  structure beyond chance. Not a crisp tree, not a loose tree: no tree.
+- **PR-D:** deep-suffix share 0.29–0.38, but raw_s ≈ 0.08 makes the
+  question moot — there is no meaningful past tree at any depth.
+- **PR-E (pond control): CONFIRMED.** Pond partial_s +0.442,
+  partial_p +0.062 — the past corner, as registered.
+
+**The finding:** the pond and the Llama occupy orthogonal corners of
+the past–future plane (`results/exp01/which_tree_plane.png`). The
+reservoir organizes its states by where the text has BEEN (a suffix
+tree, forced by fading memory); the trained transformer organizes by
+where the text is GOING (faithfulness to the empirical next-char
+distribution, strengthening with depth to L12), and its geometry is
+not hierarchical at all — a smooth predictive manifold, not a tree.
+Finding 7's "retrieval without storage," now photographed: the state
+does not encode the past because it is entirely spent on the future.
+Universality (Finding 5) is hereby SCOPED: substrate-independence
+holds across fading-memory systems; training for prediction escapes
+the class entirely. Caveats: one model (1B, 4-bit), natural-text
+drive, position-matched pairs |Δt| ≤ 64, linear-rank partials,
+d_p^ext at 5-gram order.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
