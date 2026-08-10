@@ -1,0 +1,31 @@
+{
+  "config": {
+    "n_reservoir": 100000,
+    "rhos": [
+      1.1
+    ],
+    "leak": 1.0,
+    "train_chars": 1000000,
+    "eval_chars": 100000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0,
+    "fp16_buffer": true,
+    "tag": "_N100000_probe",
+    "lr": 0.00015
+  },
+  "rows": [
+    {
+      "rho": 1.1,
+      "voided": false,
+      "logistic_val_bpc": 2.2025,
+      "logistic_test_bpc": 2.2793,
+      "ridge_val_bpc": NaN,
+      "wall_s": 1422.0
+    }
+  ],
+  "best_rho": {
+    "ridge": 1.1,
+    "logistic": 1.1
+  }
+}

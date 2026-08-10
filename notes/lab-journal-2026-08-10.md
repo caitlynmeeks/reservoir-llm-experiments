@@ -753,6 +753,14 @@ gap statistically ≈ 0 (|gap| < 2 se). If instead the gap is uniform
 across pooled halves, the mechanism is not pooling and the
 winner-take-all robustness story takes the floor.
 
+**FLY-POND VERDICT (N=100k, 1M chars, lr=1.5e-4, clipped):** val
+2.2025 / test 2.2793, no void. Ordinal CONFIRMED (beats 50k@1M's
+2.2306); quantitative MISSED (registered ≤ 2.15). Neuron-scaling is
+thinning (0.028 bits for the 50k→100k doubling); the 20k@5M duel
+champion (2.1576 val / 2.2253 test) retains the crown. At current
+scales, data beats neurons; the 5-gram fence (2.095 test) is a data
+problem now. `results/track_p/p1_acid_test_N100000_probe.json`
+
 **T10 VERDICT: NOT_POOLING — backoff hypothesis dead by its own
 registered knife, inverted.** Rare-raw gap reproduces (+0.0116 ±
 0.0027, 68k rows); the pooled-LOW half carries +0.0154 vs pooled-high
