@@ -1,0 +1,21 @@
+{
+  "config": {
+    "n_reservoir": 1000,
+    "rho": 0.95,
+    "leak": 1.0,
+    "train_chars": 2000000,
+    "eval_chars": 200000,
+    "segments": 256,
+    "chunk": 32,
+    "washout": 200,
+    "lr": 0.001,
+    "max_epochs": 2,
+    "patience": 2,
+    "seed": 0,
+    "tag": "_smoke"
+  },
+  "voided": false,
+  "val_bpc": 2.9383,
+  "test_bpc": 2.9553,
+  "trainable_params": 27027
+}

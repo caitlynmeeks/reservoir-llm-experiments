@@ -850,6 +850,19 @@ ROWS are the binding constraint now, not text. Ceiling under a
 (re-drive reservoir per epoch, all 80M rows, ~17h) — mapped, not
 launched. `results/track_p/p1_acid_test_N20000_T80M_stride16.json`
 
+**FENCE ASSAULT III (the streaming campaign) — PRE-REGISTERED (before
+launch):** streaming logistic readout — the reservoir is re-driven
+over the full 80M characters EVERY epoch, one Adam step per 8,192-row
+chunk as states are produced (S=256 segments × 32-step chunks = one
+exact batch; nothing materialized). N=20k, ρ=0.95, leak=1, lr=1e-3,
+clip 1.0, max 8 epochs, patience 2, auto-void rule armed. All ~80M
+rows per epoch — 16× the rows any readout has seen. Budget: ~60–90
+min/epoch, expect 5–10h wall-clock. ORDINAL: new champion (val <
+2.0938). THE ORDER (quantitative): test < 1.984 — the fence. Honest
+expectation from row-scaling: lands 2.07–2.12 and the fence survives;
+the lab's quantitative record is 1-for-11 and that one was the hash
+table, so the fence's insurers may price accordingly.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
