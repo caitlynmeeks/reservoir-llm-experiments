@@ -350,6 +350,60 @@ shaves 1/|λ| to a log law. Bonus observation: distinct states swell
 continuously into the fractal at criticality. λ=−0.02 never reaches
 determinism by k=12. `results/track_t/t7_kstar_sweep.json`
 
+## U4/U5 (the melting) — PRE-REGISTERED form (before running)
+
+The tanh pond at leak 1 is an iterated function system: each symbol c
+applies the contraction f_c(x) = tanh(Wx + Win e_c + b), and the state
+after a history is the composition along the suffix. IFS theory (Moran)
+predicts the attractor's fractal dimension for V equally-branching maps
+of contraction ratio ρ:
+
+    D ≈ ln V / ln(1/ρ)        (V = 27)
+
+- **U5-PR (form + ordinal, exact numbers held loosely per this lab's
+  track record):** correlation dimension D₂ of sampled states is
+  strictly increasing in ρ, and for ρ ≤ 0.6 tracks ln27/ln(1/ρ)
+  (predicting ≈ 2.0, 2.7, 3.6, 4.8, 6.5 at ρ = 0.2…0.6) within
+  estimator error; above ρ ≈ 0.6 the estimate saturates at the
+  finite-sample ceiling (~6–7 for 2k points), which is a measurement
+  limit, not physics.
+- **Melting picture:** the tropical pond's distinct-state count and the
+  tanh pond's fractal dimension are the same divergence seen from the
+  discrete and continuous sides: both blow up approaching criticality
+  (λ → 0⁻, ρ → 1). Discreteness is distance from the edge.
+
+**U5-PR VERDICT: FALSIFIED — including the ordinal (first full miss of
+the night).** Measured D₂ DECREASES with ρ: 97.5 / 59.1 / 28.2 / 16.0 /
+10.9 / 8.0 / 7.9 at ρ = 0.2…0.95. Diagnosis (estimator artifact, not
+physics): the attractor is near-ultrametric (U2, cophenetic 0.99) —
+its scales are QUANTIZED, so C(r) is a staircase (plateaus between
+cluster levels, concentration-sharpened cliffs at them), and a
+fixed-quantile slope window lands on a cliff; smaller ρ → wider stairs
+→ sharper cliffs → absurd slopes. D₂ = 97 in 2k points is the tell.
+
+**AMENDED PRE-REGISTRATION (before the staircase analysis):** log-log
+C(r) shows discrete stairs; horizontal spacing per stair ≈ ln(1/ρ),
+vertical drop ≈ ln 27, so stair-geometry slope ≈ Moran's
+ln27/ln(1/ρ). A wide window spanning ≥2 levels approaches Moran for
+ρ ≤ 0.4; stairs blur progressively as ρ → 1 (the smooth-side
+melting: the staircase, not the set, is what melts).
+
+**U5b VERDICT: staircase CONFIRMED structurally, naive Moran numbers
+missed low (slopes 0.62 / 0.89 / 1.55 / 3.11 vs 2.05 / 3.60 / 6.45 /
+64 at ρ = 0.2/0.4/0.6/0.95).** The stairs exist exactly as predicted
+and melt smooth by ρ=0.95 (`results/track_u/u5b_staircase.png` — one
+stair = one suffix-tree level). Two identified corrections, both
+pushing the slope below naive Moran: (1) the per-level contraction is
+the trajectory-Jacobian's effective factor, stronger than ρ itself
+(tanh' < 1), widening the treads; (2) the branching measure is English
+text, not uniform — the vertical drop per stair measures the corpus's
+Rényi-2 collision entropy (~3 bits/char), not log₂27 = 4.75. The true
+law to test next session: slope = H₂(corpus) / log(1/c_eff(ρ)), with
+both factors measured independently (level-spacing regression).
+Caveat: stairs below r/r_max ≈ 2⁻²⁰ are float32 quantization, not
+structure. Meta: quantitative miss #6; structural/ordinal claims hold
+after amendment.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

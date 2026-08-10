@@ -1,0 +1,18 @@
+{
+  "0.2": {
+    "wide_window_slope": 0.62,
+    "moran": 2.05
+  },
+  "0.4": {
+    "wide_window_slope": 0.89,
+    "moran": 3.6
+  },
+  "0.6": {
+    "wide_window_slope": 1.55,
+    "moran": 6.45
+  },
+  "0.95": {
+    "wide_window_slope": 3.11,
+    "moran": 64.25
+  }
+}
