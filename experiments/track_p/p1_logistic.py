@@ -72,6 +72,7 @@ def main():
     ap.add_argument("--fp16-buffer", action="store_true",
                     help="store train states float16 (halves RAM; math stays f32)")
     ap.add_argument("--tag", default="", help="suffix for output filenames")
+    ap.add_argument("--lr", type=float, default=3e-3)
     a = ap.parse_args()
     os.makedirs(RESULTS, exist_ok=True)
 
@@ -91,7 +92,8 @@ def main():
         print(f"rho={rho}: {Xtr.shape[0]} train rows "
               f"({Xtr.nbytes / 1e9:.1f}GB), collect {time.time() - t0:.0f}s",
               flush=True)
-        lr = LogisticReadout(a.n_reservoir, V, max_epochs=20, seed=a.seed)
+        lr = LogisticReadout(a.n_reservoir, V, lr=a.lr, max_epochs=20,
+                             seed=a.seed)
         lr.fit(Xtr, ytr, Xva, yva)
         val_bpc, test_bpc = lr.bpc(Xva, yva), lr.bpc(Xte, yte)
 

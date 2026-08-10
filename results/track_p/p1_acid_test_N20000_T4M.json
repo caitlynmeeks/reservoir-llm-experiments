@@ -1,0 +1,38 @@
+{
+  "config": {
+    "n_reservoir": 20000,
+    "rhos": [
+      0.95,
+      1.1
+    ],
+    "leak": 1.0,
+    "train_chars": 4000000,
+    "eval_chars": 200000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0,
+    "fp16_buffer": true,
+    "tag": "_N20000_T4M",
+    "lr": 0.003
+  },
+  "rows": [
+    {
+      "rho": 0.95,
+      "logistic_val_bpc": 2.3045,
+      "logistic_test_bpc": 2.359,
+      "ridge_val_bpc": NaN,
+      "wall_s": 504.2
+    },
+    {
+      "rho": 1.1,
+      "logistic_val_bpc": 2.2986,
+      "logistic_test_bpc": 2.3907,
+      "ridge_val_bpc": NaN,
+      "wall_s": 546.7
+    }
+  ],
+  "best_rho": {
+    "ridge": 0.95,
+    "logistic": 1.1
+  }
+}

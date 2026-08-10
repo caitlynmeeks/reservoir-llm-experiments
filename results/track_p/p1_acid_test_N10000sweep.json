@@ -1,0 +1,53 @@
+{
+  "config": {
+    "n_reservoir": 10000,
+    "rhos": [
+      0.6,
+      0.8,
+      0.95,
+      1.1
+    ],
+    "leak": 1.0,
+    "train_chars": 2000000,
+    "eval_chars": 200000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0,
+    "fp16_buffer": true,
+    "tag": "_N10000sweep"
+  },
+  "rows": [
+    {
+      "rho": 0.6,
+      "logistic_val_bpc": 2.4941,
+      "logistic_test_bpc": 2.5379,
+      "ridge_val_bpc": NaN,
+      "wall_s": 186.2
+    },
+    {
+      "rho": 0.8,
+      "logistic_val_bpc": 2.3472,
+      "logistic_test_bpc": 2.3961,
+      "ridge_val_bpc": NaN,
+      "wall_s": 191.7
+    },
+    {
+      "rho": 0.95,
+      "logistic_val_bpc": 2.3527,
+      "logistic_test_bpc": 2.4262,
+      "ridge_val_bpc": NaN,
+      "wall_s": 171.6
+    },
+    {
+      "rho": 1.1,
+      "logistic_val_bpc": 2.3839,
+      "logistic_test_bpc": 2.4458,
+      "ridge_val_bpc": NaN,
+      "wall_s": 152.7
+    }
+  ],
+  "best_rho": {
+    "ridge": 0.6,
+    "logistic": 0.8
+  }
+}

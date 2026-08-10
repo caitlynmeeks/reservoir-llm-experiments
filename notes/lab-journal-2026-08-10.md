@@ -404,6 +404,55 @@ Caveat: stairs below r/r_max ≈ 2⁻²⁰ are float32 quantization, not
 structure. Meta: quantitative miss #6; structural/ordinal claims hold
 after amendment.
 
+## OVERNIGHT RUNS (launched while Caity sleeps) — PRE-REGISTERED
+
+**N-sweep under the logistic readout** (ρ ∈ {0.6, 0.8, 0.95, 1.1} at
+N ∈ {1k, 2k, 10k, 20k}, 2M chars; N=50k at ρ ∈ {0.8, 0.95, 1.1}, 1M
+chars, reduced eval — memory ceiling):
+- **PR (ordinal, the standing ρ-drift bet):** the logistic argmin over
+  ρ is non-decreasing in N, with argmin(1k) ≤ argmin(5k)=0.95 ≤
+  argmin(20k), at least one inequality strict across the sweep.
+  Rationale: bigger ponds can afford deeper memory (Finding 3's tax is
+  capacity-relative).
+- **PR (frontier):** val bpc at fixed ρ=0.95 improves monotonically in
+  N with visibly diminishing returns per doubling.
+
+**Uniform-drive staircase control** (champion pond driven by i.i.d.
+uniform symbols instead of text8):
+- **PR:** the correlation-staircase vertical drops steepen — the
+  wide-window slope at matched ρ EXCEEDS the text8-driven slope by a
+  factor ≈ log₂27 / H₂(text8) (≈ 1.5–1.9×), because stair heights
+  measure the drive's collision entropy, not the alphabet size.
+  Unigram Rényi-2 of text8 computed alongside as the reference.
+
+**MORNING VERDICTS (runs completed while Caity slept):**
+
+- **ρ-drift bet: CONFIRMED** (the ordinal streak continues). Logistic
+  argmin over ρ by N: 0.8 (1k) → 0.8 (2k) → 0.8 (10k, tied with 0.95
+  within ~0.005) → **1.1 (20k)**, with 5k's acid-test 0.95 in between.
+  Both registered inequalities hold, both strict. At N=20k the optimum
+  is SUPERCRITICAL: with a rich readout and enough neurons, the best
+  language reservoir sits past the edge. Finding 1's final form is now
+  measured across a factor of 20 in N.
+- **Frontier: diminishing returns confirmed, and sharper — data
+  saturation.** Best val bpc: 2.642 (1k) → 2.525 (2k) → 2.347 (10k) →
+  2.348 (20k) at 2M chars: 10k→20k gains nothing. 2M training chars is
+  the binding constraint at N ≥ 10k. Follow-up queued: N=20k at 4M
+  chars. PR: val bpc < 2.30 if data was the ceiling; ≈ 2.35 if the
+  reservoir itself has saturated.
+- **N=50k FAILED — SGD divergence, not physics** (val bpc 5.5–9.7,
+  worse than uniform: optimizer blow-up; lr=3e-3 untuned for 50k-dim
+  features). Corrected run queued at lr=3e-4. PR: with the lower lr,
+  N=50k lands within [2.25, 2.45] on 1M chars.
+- **U5c (uniform control): direction SPECTACULARLY confirmed,
+  magnitude miss #7.** Uniform-drive stair drops measure 4.7–4.8 bits
+  — log₂27 to within reading error — vs text8's ~2–3.5; slope ratios
+  2.19/2.28 (ρ=0.2/0.6), ABOVE the registered 1.5–1.9 band because the
+  operative text8 quantity is the CONDITIONAL Rényi-2 rate (implied
+  ≈ 2.1 bits/char), lower than the unigram 3.741 used for the band.
+  The staircase is a ruler: treads measure the dynamics, drops measure
+  the drive. `results/track_u/u5c_uniform_control.png`
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

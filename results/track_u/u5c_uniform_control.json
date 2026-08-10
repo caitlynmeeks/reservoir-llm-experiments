@@ -1,0 +1,10 @@
+{
+  "h2_text8_unigram_bits": 3.741,
+  "log2_V": 4.755,
+  "rho0.2_text8_slope": 0.62,
+  "rho0.2_uniform_slope": 1.358,
+  "rho0.2_slope_ratio": 2.19,
+  "rho0.6_text8_slope": 1.501,
+  "rho0.6_uniform_slope": 3.422,
+  "rho0.6_slope_ratio": 2.28
+}

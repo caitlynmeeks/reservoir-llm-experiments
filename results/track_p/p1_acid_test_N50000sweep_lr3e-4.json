@@ -1,0 +1,46 @@
+{
+  "config": {
+    "n_reservoir": 50000,
+    "rhos": [
+      0.8,
+      0.95,
+      1.1
+    ],
+    "leak": 1.0,
+    "train_chars": 1000000,
+    "eval_chars": 100000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0,
+    "fp16_buffer": true,
+    "tag": "_N50000sweep_lr3e-4",
+    "lr": 0.0003
+  },
+  "rows": [
+    {
+      "rho": 0.8,
+      "logistic_val_bpc": 2.3626,
+      "logistic_test_bpc": 2.4313,
+      "ridge_val_bpc": NaN,
+      "wall_s": 528.8
+    },
+    {
+      "rho": 0.95,
+      "logistic_val_bpc": 2.2679,
+      "logistic_test_bpc": 2.3514,
+      "ridge_val_bpc": NaN,
+      "wall_s": 540.9
+    },
+    {
+      "rho": 1.1,
+      "logistic_val_bpc": 2.2306,
+      "logistic_test_bpc": 2.3191,
+      "ridge_val_bpc": NaN,
+      "wall_s": 541.1
+    }
+  ],
+  "best_rho": {
+    "ridge": 0.8,
+    "logistic": 1.1
+  }
+}
