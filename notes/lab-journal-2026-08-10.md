@@ -516,6 +516,19 @@ run survived on batch-order luck). Rerun at lr=1e-3; the
 pre-registration is unchanged — this is optimizer hygiene, diagnosed
 from the epoch traces before any verdict was read.
 
+**DUEL VERDICT (stable rerun, lr=1e-3): WON, decisively.** Val-chosen
+ρ=0.95 → val 2.1576, **test 2.2253** vs the 4-gram's 2.392 — the
+registered 2.37 line cleared by 0.145. The earned sentence: matched
+parameters (540k vs 531k), same 5M chars, no feature training, better
+bpc by 0.17. This is also the NEW OVERALL CHAMPION (beats 50k@2M's
+2.1742 val / 2.2285 test). Honesty riders: (1) the earlier "dead
+heats" at 20k were optimizer-limited, and ALL lr=3e-3 large-N results
+are lower bounds — the N-sweep's bpc column understates big ponds;
+(2) with stable optimization the 20k argmin is 0.95–1.1 (val gap
+0.001, a tie): "firmly supercritical at 20k" softens to "at or above
+0.95"; the ρ-drift bet's inequalities still hold. The 50k row (lr
+3e-4) stands.
+
 ## Finding 8 — The Llama grows no tree: a future manifold (which-tree run)
 
 Verdicts against the brief's pre-registered thresholds:

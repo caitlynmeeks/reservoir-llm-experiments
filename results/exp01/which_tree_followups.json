@@ -1,0 +1,17 @@
+{
+  "triptych": {
+    "L1": 0.1156,
+    "L4": 0.1152,
+    "L8": 0.1082,
+    "L12": 0.0623,
+    "L14": 0.0446
+  },
+  "dimension_L12": {
+    "wide_window_D2": 7.82,
+    "fit_rms_resid_bits": 0.205
+  },
+  "bf16_cophenetic_L12": {
+    "value": 0.6474,
+    "null": 0.6575
+  }
+}
