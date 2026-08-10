@@ -821,6 +821,26 @@ order: "take the fence"): test < 1.984. Extrapolation says ~2.14 and
 the fence survives; the lab's quantitative record says trust nothing,
 including that.
 
+**T11 SEED REPLICATION — PRE-REGISTERED (before running):** seeds 1–3
+added to seed 0 (new reservoir draws, both ponds; data fixed).
+ORDINAL: the directional gap (tanh exclusive-error trigram-mode rate >
+tropical's) holds in EVERY seed, 4/4. SEVERITY: mechanism upgrades
+from "supported" to CONFIRMED only if the pooled ratio (all seeds,
+counts summed) ≥ the original 1.5 bar; the pooled ratio and its
+per-seed spread are reported either way.
+
+**T11 SEED REPLICATION VERDICT: registered 4/4 FALSIFIED (3/4; seed 3
+is a dead null at ratio 1.003), pooled ratio 1.197 — severity bar not
+met.** The pooled effect is real (+0.067 gap, 12.9σ over 34k exclusive
+errors) but heterogeneous across reservoir draws. Demotion with
+precision: if the mechanism were purely algebraic every wiring would
+show it — one in four doesn't — so the signature is WIRING-MEDIATED,
+prime suspect the seed-dependent merge structure (each random graph
+protects different rare classes). Status: weakly supported,
+heterogeneous; next instrument must condition on each seed's own merge
+map. Per-seed ratios 1.319 / 1.200 / 1.281 / 1.003.
+`results/track_t/t11_interp_signature_seed{1,2,3}.json`
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

@@ -30,6 +30,10 @@ RESULTS = os.path.join(HERE, "..", "..", "results", "track_t")
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seed", type=int, default=0)
+    args = ap.parse_args()
     os.makedirs(RESULTS, exist_ok=True)
     train, val, _ = load_text8()
     train, val = train[:1_000_000], val[:200_000]
@@ -37,10 +41,10 @@ def main():
     preds, correct = {}, {}
     yva = cva = None
     for name, esn, enc in [
-        ("tanh", ESN(V, 1000, spectral_radius=0.6, leak_rate=1.0, seed=0),
+        ("tanh", ESN(V, 1000, spectral_radius=0.6, leak_rate=1.0, seed=args.seed),
          one_hot),
         ("trop", TropicalESN(V, 1000, cycle_mean=-0.1, input_scale=1.0,
-                             seed=0), lambda s: s),
+                             seed=args.seed), lambda s: s),
     ]:
         Xtr, ytr, _ = collect_states(esn, train, enc)
         Xva, yva, cva = collect_states(esn, val, enc)
@@ -93,9 +97,9 @@ def main():
            "registered": "ratio >= 1.5 confirms interpolation bias"}
     out["verdict"] = "CONFIRMED" if ratio >= 1.5 else "NOT_CONFIRMED"
     print(json.dumps(out, indent=2))
-    with open(os.path.join(RESULTS, "t11_interp_signature.json"), "w") as f:
+    with open(os.path.join(RESULTS, f"t11_interp_signature_seed{args.seed}.json"), "w") as f:
         json.dump(out, f, indent=2)
-    print(f"wrote {RESULTS}/t11_interp_signature.json")
+    print(f"wrote {RESULTS}/t11_interp_signature_seed{args.seed}.json")
 
 
 if __name__ == "__main__":

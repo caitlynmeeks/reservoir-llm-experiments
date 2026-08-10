@@ -1,0 +1,13 @@
+{
+  "n_tanh_exclusive_wrong": 4624,
+  "n_trop_exclusive_wrong": 4293,
+  "tanh_error_matches_trigram_mode": 0.3847,
+  "trop_error_matches_trigram_mode": 0.3003,
+  "ratio": 1.281,
+  "secondary_all_wrong": {
+    "tanh": 0.6019,
+    "trop": 0.5732
+  },
+  "registered": "ratio >= 1.5 confirms interpolation bias",
+  "verdict": "NOT_CONFIRMED"
+}
