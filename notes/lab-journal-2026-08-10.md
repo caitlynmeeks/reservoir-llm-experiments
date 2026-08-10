@@ -780,6 +780,25 @@ smoothed answer — more often than tropical's wrong argmax does.
 ORDINAL: tanh's error-matches-trigram-mode rate exceeds tropical's by
 ≥ 1.5×. Confirms the interpolation-bias mechanism if it holds.
 
+**T11 VERDICT: NOT_CONFIRMED at the registered bar; directionally
+supported at ~9σ.** tanh's exclusive rare-context errors match the
+trigram modal (smoothed) answer 43.8% vs tropical's 33.2% — the
+predicted asymmetry, clearly real — but ratio 1.32 < the registered
+1.5×. On shared errors the rates are identical (0.59 vs 0.58): the
+signature lives only in the exclusive-error zone, as a real mechanism
+should. Status of "isolation protects the rare": supported, not
+confirmed; the effect is real and moderate.
+`results/track_t/t11_interp_signature.json`
+
+**5-gram fence assault — PRE-REGISTERED (before running):** N=20k,
+ρ ∈ {0.95, 1.1} val-chosen, lr=1e-3, 20M training chars with stride-4
+state sampling (4× textual diversity at constant 200GB RAM; decimation
+of time-correlated rows should cost little). Anchors: the standing
+5-gram@5M (test 2.095) AND a same-data 5-gram@20M (to be computed —
+the primary, honest comparison). ORDINAL: beats the 20k@5M champion
+(val < 2.1576). QUANTITATIVE (the fence bet, history laughing
+already): test < the same-data 5-gram@20M's test bpc.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

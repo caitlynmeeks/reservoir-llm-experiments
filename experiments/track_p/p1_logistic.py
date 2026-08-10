@@ -38,20 +38,28 @@ SURFACE, INK, INK2, MUTED, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#
 
 
 def collect(esn: ESN, ids: np.ndarray, segments: int, washout: int,
-            chunk: int = 256, dtype=np.float32):
-    """Stream all post-washout (state, next-char) rows into RAM."""
+            chunk: int = 256, dtype=np.float32, stride: int = 1):
+    """Stream all post-washout (state, next-char) rows into RAM.
+    stride > 1 keeps every stride-th timestep — time-decimation that
+    trades correlated rows for textual diversity at constant RAM."""
     seg = as_parallel_segments(ids, segments)
     S, T = seg.shape
-    n_rows = S * (T - 1 - washout)
+    n_rows = (S * (T - 1 - washout)) // stride + S
     X = np.empty((n_rows, esn.N), dtype=dtype)
     y = np.empty(n_rows, dtype=np.uint8)
     cur = 0
+    tick = 0
 
     def consume(st, tg):
-        nonlocal cur
-        k = st.shape[0] * st.shape[1]
-        X[cur : cur + k] = st.reshape(-1, esn.N)
-        y[cur : cur + k] = tg.reshape(-1)
+        nonlocal cur, tick
+        Sb, C, _ = st.shape
+        keep = np.arange(C)[(tick + np.arange(C)) % stride == 0]
+        tick += C
+        if len(keep) == 0:
+            return
+        k = Sb * len(keep)
+        X[cur : cur + k] = st[:, keep].reshape(-1, esn.N)
+        y[cur : cur + k] = tg[:, keep].reshape(-1)
         cur += k
 
     stream_states(esn, seg, chunk, washout, consume)
@@ -73,6 +81,7 @@ def main():
                     help="store train states float16 (halves RAM; math stays f32)")
     ap.add_argument("--tag", default="", help="suffix for output filenames")
     ap.add_argument("--lr", type=float, default=3e-3)
+    ap.add_argument("--stride", type=int, default=1)
     a = ap.parse_args()
     os.makedirs(RESULTS, exist_ok=True)
 
@@ -86,7 +95,8 @@ def main():
         esn = ESN(V, a.n_reservoir, spectral_radius=rho, leak_rate=a.leak,
                   seed=a.seed)
         Xtr, ytr = collect(esn, train, a.segments, a.washout,
-                           dtype=np.float16 if a.fp16_buffer else np.float32)
+                           dtype=np.float16 if a.fp16_buffer else np.float32,
+                           stride=a.stride)
         ev_dtype = np.float16 if a.fp16_buffer else np.float32
         Xva, yva = collect(esn, val, 8, a.washout, dtype=ev_dtype)
         Xte, yte = collect(esn, test, 8, a.washout, dtype=ev_dtype)
