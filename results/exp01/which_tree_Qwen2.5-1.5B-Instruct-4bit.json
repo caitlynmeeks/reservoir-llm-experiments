@@ -1,0 +1,36 @@
+{
+  "model": "mlx-community/Qwen2.5-1.5B-Instruct-4bit",
+  "n_layers": 28,
+  "layers": {
+    "L1": {
+      "past": 0.0642,
+      "now": 0.112,
+      "future": 0.1068
+    },
+    "L7": {
+      "past": 0.047,
+      "now": 0.0985,
+      "future": 0.2691
+    },
+    "L14": {
+      "past": 0.0344,
+      "now": 0.1039,
+      "future": 0.2411
+    },
+    "L21": {
+      "past": 0.014,
+      "now": 0.0904,
+      "future": 0.3443
+    },
+    "L26": {
+      "past": 0.0098,
+      "now": 0.0465,
+      "future": 0.3777
+    }
+  },
+  "cophenetic": {
+    "layer": 26,
+    "value": 0.8601,
+    "null": 0.8724
+  }
+}

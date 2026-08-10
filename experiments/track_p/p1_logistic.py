@@ -87,8 +87,9 @@ def main():
                   seed=a.seed)
         Xtr, ytr = collect(esn, train, a.segments, a.washout,
                            dtype=np.float16 if a.fp16_buffer else np.float32)
-        Xva, yva = collect(esn, val, 8, a.washout)
-        Xte, yte = collect(esn, test, 8, a.washout)
+        ev_dtype = np.float16 if a.fp16_buffer else np.float32
+        Xva, yva = collect(esn, val, 8, a.washout, dtype=ev_dtype)
+        Xte, yte = collect(esn, test, 8, a.washout, dtype=ev_dtype)
         print(f"rho={rho}: {Xtr.shape[0]} train rows "
               f"({Xtr.nbytes / 1e9:.1f}GB), collect {time.time() - t0:.0f}s",
               flush=True)

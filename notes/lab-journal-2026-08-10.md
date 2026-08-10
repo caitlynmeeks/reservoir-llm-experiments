@@ -667,6 +667,53 @@ gradient clipping (global norm 1.0) added to LogisticReadout alongside
 the lr=1e-3 retry policy. The duel line stays at 2.37, test column,
 no rounding mercy.
 
+## Afternoon slate — PRE-REGISTERED (before running)
+
+**Second model (Qwen2.5-1.5B-Instruct-4bit — different family, dense):**
+- ORDINAL, core replication: future leads past at every probed layer
+  under common conditioning; cophenetic tree gates fail (no tree).
+- ORDINAL, construction zone: some early-mid layer has NOW > FUTURE
+  (an L4-analog exists). If absent, the dip is Llama-idiosyncratic and
+  the arc's middle beat is demoted to "sometimes."
+
+**N=100k frontier probe (1M chars, lr=1.5e-4 with clipping):**
+- ORDINAL: beats 50k@1M (val < 2.2306). QUANTITATIVE (history says
+  no): val ≤ 2.15.
+
+**T3b (concat ponds vs size-matched null; ridge, 1M chars):**
+- PR-i (no mean gain): concat(tanh1k ⊕ trop1k) val bpc within ±0.01
+  of the lone tanh-2k null.
+- PR-ii (complementary failures): the parents' top-1 error sets on val
+  have Jaccard < 0.8, and concat recovers > 50% of the positions where
+  exactly one parent is correct.
+- Slicing: accuracy by 4-char-context corpus-frequency decile, per
+  system — T4's cliff-vs-fade masonry predicts tropical relatively
+  stronger on frequent contexts, tanh on rare ones.
+
+**SECOND-MODEL VERDICT (Qwen2.5-1.5B, 28 layers):** core replication
+CONFIRMED — future leads past at every probed layer (L1 +0.107 vs
++0.064; L26 +0.378 vs +0.010; past declines monotonically), and the
+tree gates fail again (cophenetic 0.860 vs null 0.872 — BELOW null, a
+third time, second family). Finding 8 is now cross-family. The
+construction zone: NOT clearly replicated — Qwen's only NOW ≥ FUTURE
+moment is L1 by +0.005 (a tie, not a dip); no interior L4-analog. The
+Llama L4 dip is demoted to "family-idiosyncratic pending more models";
+the arc's universal spine is: past never organizes, future
+strengthens with depth, present decays.
+`results/exp01/which_tree_Qwen2.5-1.5B-Instruct-4bit.json`
+
+**T3b VERDICT:** PR-i FALSIFIED narrowly in the interesting direction:
+concat (2.9445 val) beats the size-matched tanh-2k null (2.9596) by
+0.0151 — outside the ±0.01 "no mean gain" band. Algebraic diversity
+IS worth something beyond size. PR-ii mixed: parents' error Jaccard
+0.860 (registered < 0.8 — errors more shared than bet), but the 8.7%
+disagreement zone exists and concat recovers 58.9% of it (> 50% ✓) —
+which is exactly where the mean gain comes from. Slice bet
+DIRECTIONALLY WRONG: tropical is relatively stronger on RARE contexts,
+not frequent ones (masonry intuition inverted — the FSM's exact
+suffix-classes apparently generalize rare contexts better than
+superposed fading). `results/track_t/t8_concat_duel.json`
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

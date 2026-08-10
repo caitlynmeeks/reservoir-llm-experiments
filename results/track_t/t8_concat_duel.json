@@ -1,0 +1,50 @@
+{
+  "tanh1k": {
+    "val_bpc": 3.0986,
+    "test_bpc": 3.1116
+  },
+  "trop1k": {
+    "val_bpc": 3.0992,
+    "test_bpc": 3.1108
+  },
+  "tanh2k": {
+    "val_bpc": 2.9596,
+    "test_bpc": 2.9681
+  },
+  "concat": {
+    "val_bpc": 2.9445,
+    "test_bpc": 2.9575
+  },
+  "error_structure": {
+    "parents_error_jaccard": 0.8599,
+    "xor_frac": 0.0873,
+    "concat_recovers_xor": 0.5891,
+    "delta_concat_vs_tanh2k": -0.0151
+  },
+  "freq_decile_accuracy": {
+    "tanh1k": [
+      0.2564,
+      0.3096,
+      0.3517,
+      0.3835,
+      0.4022,
+      0.434,
+      0.4699,
+      0.4548,
+      0.5576,
+      0.5624
+    ],
+    "trop1k": [
+      0.2538,
+      0.3331,
+      0.3669,
+      0.3871,
+      0.4085,
+      0.4387,
+      0.4747,
+      0.4535,
+      0.5597,
+      0.5614
+    ]
+  }
+}
