@@ -1,0 +1,32 @@
+{
+  "config": {
+    "n_reservoir": 20000,
+    "rhos": [
+      0.95
+    ],
+    "leak": 1.0,
+    "train_chars": 80000000,
+    "eval_chars": 200000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0,
+    "fp16_buffer": true,
+    "tag": "_N20000_T80M_stride16",
+    "lr": 0.001,
+    "stride": 16
+  },
+  "rows": [
+    {
+      "rho": 0.95,
+      "voided": false,
+      "logistic_val_bpc": 2.0938,
+      "logistic_test_bpc": 2.1734,
+      "ridge_val_bpc": NaN,
+      "wall_s": 6423.0
+    }
+  ],
+  "best_rho": {
+    "ridge": 0.95,
+    "logistic": 0.95
+  }
+}

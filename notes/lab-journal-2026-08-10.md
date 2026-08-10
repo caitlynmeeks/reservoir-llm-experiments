@@ -841,6 +841,15 @@ heterogeneous; next instrument must condition on each seed's own merge
 map. Per-seed ratios 1.319 / 1.200 / 1.281 / 1.003.
 `results/track_t/t11_interp_signature_seed{1,2,3}.json`
 
+**FENCE ASSAULT II VERDICT: ordinal CONFIRMED by a nose (val 2.0938,
+new champion by 0.0045; test 2.1734), the fence STANDS by 0.19.**
+The real yield is the bent curve: 4× text at constant rows bought
+0.041 test last time, 0.011 this time — stride scaling has saturated;
+ROWS are the binding constraint now, not text. Ceiling under a
+5M-row readout: ≈ 2.17 test. The road to 1.984 is a streaming readout
+(re-drive reservoir per epoch, all 80M rows, ~17h) — mapped, not
+launched. `results/track_p/p1_acid_test_N20000_T80M_stride16.json`
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
