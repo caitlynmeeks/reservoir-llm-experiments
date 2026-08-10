@@ -340,6 +340,16 @@ depth k*(λ) (smallest k with determinism ≥ 0.99) scales like 1/|λ|,
 i.e. k*·|λ| ≈ constant across λ; measured point so far: k*=7 at
 λ=−0.1.
 
+**T7 VERDICT: form FALSIFIED (ordinal survives, again).** k*·|λ|
+declines monotonically (1.2 → 0.45 across λ = −0.4 … −0.05); the data
+instead fit k* ≈ 2·log₂(1/|λ|) (measured 3/4/4/6/9 vs 2.6/3.5/4.6/
+6.6/8.6). Post-hoc rationale (flagged as such): path count grows
+exponentially with depth, so extreme-value competition among paths
+shaves 1/|λ| to a log law. Bonus observation: distinct states swell
+2,684 → 19,206 (of 20k samples) as λ → 0⁻ — the automaton melts
+continuously into the fractal at criticality. λ=−0.02 never reaches
+determinism by k=12. `results/track_t/t7_kstar_sweep.json`
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
