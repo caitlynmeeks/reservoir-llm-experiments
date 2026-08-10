@@ -1,0 +1,12 @@
+{
+  "cells": {
+    "tanh (N=1k, \u03c1=0.6, a=1)": {
+      "faithfulness": 0.4484,
+      "cophenetic": 0.9848958869806034
+    },
+    "tropical (N=1k, \u03bb=\u22120.1)": {
+      "faithfulness": 0.4544,
+      "cophenetic": 0.9697583624032889
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "rho": 0.6,
+  "leak": 1.0,
+  "n_sample": 2000,
+  "cophenetic_correlation": 0.9904639508073709
+}

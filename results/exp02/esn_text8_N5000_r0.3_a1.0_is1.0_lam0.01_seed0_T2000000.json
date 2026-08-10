@@ -1,0 +1,25 @@
+{
+  "config": {
+    "n_reservoir": 5000,
+    "spectral_radius": 0.3,
+    "leak": 1.0,
+    "input_scale": 1.0,
+    "segments": 64,
+    "chunk": 256,
+    "washout": 200,
+    "train_chars": 2000000,
+    "eval_chars": 200000,
+    "lam": 0.01,
+    "seed": 0,
+    "synthetic": false
+  },
+  "temperature": 0.12173909848740844,
+  "val_bpc": 2.7489775405629215,
+  "test_bpc": 2.774982969695781,
+  "uniform_bpc": 4.754887502163468,
+  "trainable_params": 135028,
+  "wall_clock": {
+    "state_pass_s": 73.95320105552673,
+    "solve_s": 0.3340339660644531
+  }
+}

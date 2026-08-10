@@ -1,0 +1,249 @@
+{
+  "cells": [
+    {
+      "rho": 0.2,
+      "leak": 0.1,
+      "faithfulness": 0.165,
+      "val_bpc": 3.527
+    },
+    {
+      "rho": 0.3,
+      "leak": 0.1,
+      "faithfulness": 0.1587,
+      "val_bpc": 3.4753
+    },
+    {
+      "rho": 0.4,
+      "leak": 0.1,
+      "faithfulness": 0.1544,
+      "val_bpc": 3.4453
+    },
+    {
+      "rho": 0.5,
+      "leak": 0.1,
+      "faithfulness": 0.1571,
+      "val_bpc": 3.4331
+    },
+    {
+      "rho": 0.6,
+      "leak": 0.1,
+      "faithfulness": 0.157,
+      "val_bpc": 3.4325
+    },
+    {
+      "rho": 0.8,
+      "leak": 0.1,
+      "faithfulness": 0.1385,
+      "val_bpc": 3.4464
+    },
+    {
+      "rho": 0.95,
+      "leak": 0.1,
+      "faithfulness": 0.1327,
+      "val_bpc": 3.4654
+    },
+    {
+      "rho": 1.1,
+      "leak": 0.1,
+      "faithfulness": 0.1156,
+      "val_bpc": 3.493
+    },
+    {
+      "rho": 1.25,
+      "leak": 0.1,
+      "faithfulness": 0.1097,
+      "val_bpc": 3.5335
+    },
+    {
+      "rho": 1.4,
+      "leak": 0.1,
+      "faithfulness": 0.0776,
+      "val_bpc": 3.5875
+    },
+    {
+      "rho": 0.2,
+      "leak": 0.3,
+      "faithfulness": 0.4109,
+      "val_bpc": 2.9811
+    },
+    {
+      "rho": 0.3,
+      "leak": 0.3,
+      "faithfulness": 0.4025,
+      "val_bpc": 2.9511
+    },
+    {
+      "rho": 0.4,
+      "leak": 0.3,
+      "faithfulness": 0.4062,
+      "val_bpc": 2.9521
+    },
+    {
+      "rho": 0.5,
+      "leak": 0.3,
+      "faithfulness": 0.3967,
+      "val_bpc": 2.9608
+    },
+    {
+      "rho": 0.6,
+      "leak": 0.3,
+      "faithfulness": 0.3953,
+      "val_bpc": 2.9734
+    },
+    {
+      "rho": 0.8,
+      "leak": 0.3,
+      "faithfulness": 0.388,
+      "val_bpc": 3.0099
+    },
+    {
+      "rho": 0.95,
+      "leak": 0.3,
+      "faithfulness": 0.3719,
+      "val_bpc": 3.0489
+    },
+    {
+      "rho": 1.1,
+      "leak": 0.3,
+      "faithfulness": 0.3578,
+      "val_bpc": 3.1001
+    },
+    {
+      "rho": 1.25,
+      "leak": 0.3,
+      "faithfulness": 0.3179,
+      "val_bpc": 3.1647
+    },
+    {
+      "rho": 1.4,
+      "leak": 0.3,
+      "faithfulness": 0.2817,
+      "val_bpc": 3.2436
+    },
+    {
+      "rho": 0.2,
+      "leak": 0.6,
+      "faithfulness": 0.4506,
+      "val_bpc": 2.7764
+    },
+    {
+      "rho": 0.3,
+      "leak": 0.6,
+      "faithfulness": 0.4514,
+      "val_bpc": 2.7634
+    },
+    {
+      "rho": 0.4,
+      "leak": 0.6,
+      "faithfulness": 0.4376,
+      "val_bpc": 2.7625
+    },
+    {
+      "rho": 0.5,
+      "leak": 0.6,
+      "faithfulness": 0.4531,
+      "val_bpc": 2.7653
+    },
+    {
+      "rho": 0.6,
+      "leak": 0.6,
+      "faithfulness": 0.4533,
+      "val_bpc": 2.7713
+    },
+    {
+      "rho": 0.8,
+      "leak": 0.6,
+      "faithfulness": 0.4561,
+      "val_bpc": 2.7954
+    },
+    {
+      "rho": 0.95,
+      "leak": 0.6,
+      "faithfulness": 0.4574,
+      "val_bpc": 2.8266
+    },
+    {
+      "rho": 1.1,
+      "leak": 0.6,
+      "faithfulness": 0.4556,
+      "val_bpc": 2.8731
+    },
+    {
+      "rho": 1.25,
+      "leak": 0.6,
+      "faithfulness": 0.4595,
+      "val_bpc": 2.9386
+    },
+    {
+      "rho": 1.4,
+      "leak": 0.6,
+      "faithfulness": 0.4382,
+      "val_bpc": 3.0219
+    },
+    {
+      "rho": 0.2,
+      "leak": 1.0,
+      "faithfulness": 0.4589,
+      "val_bpc": 2.7711
+    },
+    {
+      "rho": 0.3,
+      "leak": 1.0,
+      "faithfulness": 0.4535,
+      "val_bpc": 2.749
+    },
+    {
+      "rho": 0.4,
+      "leak": 1.0,
+      "faithfulness": 0.4495,
+      "val_bpc": 2.7374
+    },
+    {
+      "rho": 0.5,
+      "leak": 1.0,
+      "faithfulness": 0.4514,
+      "val_bpc": 2.7312
+    },
+    {
+      "rho": 0.6,
+      "leak": 1.0,
+      "faithfulness": 0.4616,
+      "val_bpc": 2.73
+    },
+    {
+      "rho": 0.8,
+      "leak": 1.0,
+      "faithfulness": 0.4353,
+      "val_bpc": 2.7476
+    },
+    {
+      "rho": 0.95,
+      "leak": 1.0,
+      "faithfulness": 0.4554,
+      "val_bpc": 2.7822
+    },
+    {
+      "rho": 1.1,
+      "leak": 1.0,
+      "faithfulness": 0.4495,
+      "val_bpc": 2.8422
+    },
+    {
+      "rho": 1.25,
+      "leak": 1.0,
+      "faithfulness": 0.4527,
+      "val_bpc": 2.9297
+    },
+    {
+      "rho": 1.4,
+      "leak": 1.0,
+      "faithfulness": 0.4525,
+      "val_bpc": 3.0394
+    }
+  ],
+  "spearman_faithfulness_vs_bpc": {
+    "statistic": -0.8301904530390439,
+    "pvalue": 3.4829818166861835e-11
+  },
+  "accept_criterion": "|rho| >= 0.8"
+}

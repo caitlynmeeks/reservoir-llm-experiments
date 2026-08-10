@@ -1,0 +1,35 @@
+{
+  "config": {
+    "train_chars": 5000000,
+    "eval_chars": 500000,
+    "max_n": 5
+  },
+  "uniform_bpc": 4.754887502163468,
+  "models": {
+    "1-gram": {
+      "alpha": 1.0,
+      "val": 4.1285,
+      "test": 4.1268
+    },
+    "2-gram": {
+      "alpha": 1.0,
+      "val": 3.4447,
+      "test": 3.4466
+    },
+    "3-gram": {
+      "alpha": 0.5,
+      "val": 2.9143,
+      "test": 2.9195
+    },
+    "4-gram": {
+      "alpha": 0.5,
+      "val": 2.3946,
+      "test": 2.3915
+    },
+    "5-gram": {
+      "alpha": 0.1,
+      "val": 2.0614,
+      "test": 2.0948
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "tropical": {
+    "n_samples": 20000,
+    "n_distinct_states": 11669,
+    "by_depth": [
+      {
+        "k": 1,
+        "suffix_classes": 27,
+        "multi_sample_classes": 27,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 2,
+        "suffix_classes": 433,
+        "multi_sample_classes": 372,
+        "determined_frac": 0.0242,
+        "merged_classes": 0
+      },
+      {
+        "k": 3,
+        "suffix_classes": 2753,
+        "multi_sample_classes": 1879,
+        "determined_frac": 0.115,
+        "merged_classes": 0
+      },
+      {
+        "k": 4,
+        "suffix_classes": 7072,
+        "multi_sample_classes": 3284,
+        "determined_frac": 0.3514,
+        "merged_classes": 0
+      },
+      {
+        "k": 5,
+        "suffix_classes": 11059,
+        "multi_sample_classes": 3244,
+        "determined_frac": 0.8379,
+        "merged_classes": 0
+      },
+      {
+        "k": 6,
+        "suffix_classes": 13676,
+        "multi_sample_classes": 2712,
+        "determined_frac": 0.9974,
+        "merged_classes": 276
+      },
+      {
+        "k": 7,
+        "suffix_classes": 15594,
+        "multi_sample_classes": 2166,
+        "determined_frac": 1.0,
+        "merged_classes": 370
+      },
+      {
+        "k": 8,
+        "suffix_classes": 16966,
+        "multi_sample_classes": 1628,
+        "determined_frac": 1.0,
+        "merged_classes": 319
+      },
+      {
+        "k": 9,
+        "suffix_classes": 17831,
+        "multi_sample_classes": 1219,
+        "determined_frac": 1.0,
+        "merged_classes": 247
+      },
+      {
+        "k": 10,
+        "suffix_classes": 18467,
+        "multi_sample_classes": 921,
+        "determined_frac": 1.0,
+        "merged_classes": 187
+      },
+      {
+        "k": 11,
+        "suffix_classes": 18894,
+        "multi_sample_classes": 670,
+        "determined_frac": 1.0,
+        "merged_classes": 127
+      },
+      {
+        "k": 12,
+        "suffix_classes": 19173,
+        "multi_sample_classes": 524,
+        "determined_frac": 1.0,
+        "merged_classes": 99
+      }
+    ]
+  },
+  "tanh": {
+    "n_samples": 20000,
+    "n_distinct_states": 20000,
+    "by_depth": [
+      {
+        "k": 1,
+        "suffix_classes": 27,
+        "multi_sample_classes": 27,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 2,
+        "suffix_classes": 433,
+        "multi_sample_classes": 372,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 3,
+        "suffix_classes": 2753,
+        "multi_sample_classes": 1879,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 4,
+        "suffix_classes": 7072,
+        "multi_sample_classes": 3284,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 5,
+        "suffix_classes": 11059,
+        "multi_sample_classes": 3244,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 6,
+        "suffix_classes": 13676,
+        "multi_sample_classes": 2712,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 7,
+        "suffix_classes": 15594,
+        "multi_sample_classes": 2166,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 8,
+        "suffix_classes": 16966,
+        "multi_sample_classes": 1628,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 9,
+        "suffix_classes": 17831,
+        "multi_sample_classes": 1219,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 10,
+        "suffix_classes": 18467,
+        "multi_sample_classes": 921,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 11,
+        "suffix_classes": 18894,
+        "multi_sample_classes": 670,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      },
+      {
+        "k": 12,
+        "suffix_classes": 19173,
+        "multi_sample_classes": 524,
+        "determined_frac": 0.0,
+        "merged_classes": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "config": {
+    "n_reservoir": 1000,
+    "cycle_means": [
+      -0.3,
+      -0.1,
+      -0.02
+    ],
+    "input_scales": [
+      1.0,
+      3.0
+    ],
+    "grid": true,
+    "segments": 64,
+    "chunk": 256,
+    "washout": 200,
+    "train_chars": 1000000,
+    "eval_chars": 200000,
+    "lam": 0.01,
+    "seed": 0
+  },
+  "uniform_bpc": 4.754887502163468,
+  "trainable_params": 27028,
+  "runs": [
+    {
+      "cycle_mean": -0.3,
+      "input_scale": 1.0,
+      "val_bpc": 3.1412503490454426,
+      "test_bpc": 3.149229097999989,
+      "temperature": 0.11741839646678938,
+      "state_pass_s": 18.8
+    },
+    {
+      "cycle_mean": -0.3,
+      "input_scale": 3.0,
+      "val_bpc": 3.10084022435214,
+      "test_bpc": 3.118721947438385,
+      "temperature": 0.1151470893768068,
+      "state_pass_s": 19.0
+    },
+    {
+      "cycle_mean": -0.1,
+      "input_scale": 1.0,
+      "val_bpc": 3.099867715725759,
+      "test_bpc": 3.1131862341799854,
+      "temperature": 0.11322564965362827,
+      "state_pass_s": 19.0
+    },
+    {
+      "cycle_mean": -0.1,
+      "input_scale": 3.0,
+      "val_bpc": 3.118801828444953,
+      "test_bpc": 3.143030740012766,
+      "temperature": 0.10745704638186455,
+      "state_pass_s": 19.0
+    },
+    {
+      "cycle_mean": -0.02,
+      "input_scale": 1.0,
+      "val_bpc": 3.1344593045046727,
+      "test_bpc": 3.162642774391307,
+      "temperature": 0.10619772828701059,
+      "state_pass_s": 19.7
+    },
+    {
+      "cycle_mean": -0.02,
+      "input_scale": 3.0,
+      "val_bpc": 3.2400124875913336,
+      "test_bpc": 3.253869016297769,
+      "temperature": 0.10235333513419516,
+      "state_pass_s": 19.1
+    }
+  ]
+}

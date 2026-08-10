@@ -1,0 +1,6 @@
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+# Apple-silicon only (install on the Mac, not in CI/containers):
+# mlx>=0.20
+# mlx-lm>=0.20   # verify current version; internal APIs move

@@ -1,0 +1,67 @@
+{
+  "config": {
+    "n_reservoir": 5000,
+    "rhos": [
+      0.4,
+      0.5,
+      0.6,
+      0.8,
+      0.95,
+      1.1
+    ],
+    "leak": 1.0,
+    "train_chars": 2000000,
+    "eval_chars": 200000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0
+  },
+  "rows": [
+    {
+      "rho": 0.4,
+      "logistic_val_bpc": 2.7049,
+      "logistic_test_bpc": 2.7246,
+      "ridge_val_bpc": 2.7374,
+      "wall_s": 119.3
+    },
+    {
+      "rho": 0.5,
+      "logistic_val_bpc": 2.6047,
+      "logistic_test_bpc": 2.6264,
+      "ridge_val_bpc": 2.7312,
+      "wall_s": 119.3
+    },
+    {
+      "rho": 0.6,
+      "logistic_val_bpc": 2.5146,
+      "logistic_test_bpc": 2.5389,
+      "ridge_val_bpc": 2.73,
+      "wall_s": 119.4
+    },
+    {
+      "rho": 0.8,
+      "logistic_val_bpc": 2.4173,
+      "logistic_test_bpc": 2.4582,
+      "ridge_val_bpc": 2.7476,
+      "wall_s": 107.0
+    },
+    {
+      "rho": 0.95,
+      "logistic_val_bpc": 2.3962,
+      "logistic_test_bpc": 2.4475,
+      "ridge_val_bpc": 2.7822,
+      "wall_s": 107.4
+    },
+    {
+      "rho": 1.1,
+      "logistic_val_bpc": 2.4437,
+      "logistic_test_bpc": 2.4996,
+      "ridge_val_bpc": 2.8422,
+      "wall_s": 107.3
+    }
+  ],
+  "best_rho": {
+    "ridge": 0.6,
+    "logistic": 0.95
+  }
+}

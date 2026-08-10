@@ -1,0 +1,31 @@
+{
+  "config": {
+    "n_reservoir": 1000,
+    "cycle_means": [
+      -0.1
+    ],
+    "input_scales": [
+      1.0
+    ],
+    "grid": false,
+    "segments": 64,
+    "chunk": 256,
+    "washout": 200,
+    "train_chars": 1000000,
+    "eval_chars": 200000,
+    "lam": 0.01,
+    "seed": 1
+  },
+  "uniform_bpc": 4.754887502163468,
+  "trainable_params": 27028,
+  "runs": [
+    {
+      "cycle_mean": -0.1,
+      "input_scale": 1.0,
+      "val_bpc": 3.1053818492193956,
+      "test_bpc": 3.1085154263044656,
+      "temperature": 0.11355525821764777,
+      "state_pass_s": 18.1
+    }
+  ]
+}
