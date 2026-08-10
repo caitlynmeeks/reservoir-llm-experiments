@@ -742,6 +742,36 @@ the tropical advantage collapses under pooled-frequency slicing.
 If confirmed: "max-plus reservoirs implement backoff smoothing in
 hardware" — connects Track T to classical n-gram smoothing theory.
 
+*Operationalization (added before running):* restrict to val rows
+whose FSM class was seen in train (report the excluded fraction).
+(1) Reproduce the raw-count gap: mean tropical−tanh accuracy gap over
+raw-frequency deciles 1–4. (2) The knife: split those same rare-raw
+rows at their median POOLED class count; registered prediction — the
+tropical advantage in the pooled-HIGH half exceeds the pooled-LOW
+half by at least 2× (backoff mechanism), with the pooled-LOW half's
+gap statistically ≈ 0 (|gap| < 2 se). If instead the gap is uniform
+across pooled halves, the mechanism is not pooling and the
+winner-take-all robustness story takes the floor.
+
+**T10 VERDICT: NOT_POOLING — backoff hypothesis dead by its own
+registered knife, inverted.** Rare-raw gap reproduces (+0.0116 ±
+0.0027, 68k rows); the pooled-LOW half carries +0.0154 vs pooled-high
++0.0076 — the tropical advantage is LARGEST where the FSM class has
+the LEAST training data. Opposite of strength-sharing. New floor
+mechanism: **isolation protects the rare** — ridge on the smooth tanh
+manifold interpolates rare contexts toward data-rich neighbors
+(over-smoothing); the FSM's isolated, equal-loudness states resist
+interpolation bias. Discreteness as a regularizer — the inverse of
+the classical smoothing tradition.
+`results/track_t/t10_pooling_test.json`
+
+**Next knife — REGISTERED, not yet run (interpolation-signature
+test):** on rare rows where exactly one pond errs, tanh's wrong
+argmax should match the SHORTER-context (3-gram) modal answer — the
+smoothed answer — more often than tropical's wrong argmax does.
+ORDINAL: tanh's error-matches-trigram-mode rate exceeds tropical's by
+≥ 1.5×. Confirms the interpolation-bias mechanism if it holds.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

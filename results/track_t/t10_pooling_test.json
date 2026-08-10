@@ -1,0 +1,11 @@
+{
+  "seen_frac": 0.9079,
+  "n_rare_rows": 68403,
+  "gap_rare_raw": 0.0116,
+  "se": 0.0027,
+  "gap_pooled_high": 0.0076,
+  "gap_pooled_low": 0.0154,
+  "se_half": 0.0039,
+  "registered": "hi >= 2x lo and |lo| < 2*se_half => backoff",
+  "verdict": "NOT_POOLING"
+}
