@@ -714,6 +714,34 @@ not frequent ones (masonry intuition inverted — the FSM's exact
 suffix-classes apparently generalize rare contexts better than
 superposed fading). `results/track_t/t8_concat_duel.json`
 
+**Hash-table demo — PRE-REGISTERED (before running):** build
+state = table[last-7-chars] from one dynamics pass over 1M train
+chars; audit full-corpus determinism during the build (same suffix
+reappearing must give a bit-identical state; register mismatches < 1%
+of repeats). At val: coverage > 50% of positions; on covered
+positions, table states bit-identical to dynamics states (≥ 99.9%)
+and restricted bpc identical to 4 decimals. The zero-compute pond,
+performed.
+
+**T9 VERDICT: CLEAN SWEEP — all four registrations hit, quantitative
+included (a first).** 302,597 suffix states from one pass; 684,539
+repeats, ZERO mismatches (full-corpus exact determinism); val coverage
+71.9%; lookup states bit-identical (frac 1.0, max diff 0.0); bpc on
+hits 2.9065 = 2.9065. The zero-compute pond is performed: at
+inference, 72% of the recurrent dynamics is a hash table.
+`results/track_t/t9_hash_pond.json`
+
+**Rare-context pooling hypothesis — REGISTERED for next (the T3b
+surprise):** the tropical FSM's mid-rare-context advantage is
+BACKOFF-BY-MERGING — exact shared-suffix classes pool statistics in
+the readout like variable-order smoothing, which fuzzy superposed
+states cannot. Test: re-slice the tanh-vs-tropical accuracy gap by
+CLASS-POOLED frequency (sum of train counts across each FSM state's
+merged suffixes) instead of raw context frequency. PREDICT (ordinal):
+the tropical advantage collapses under pooled-frequency slicing.
+If confirmed: "max-plus reservoirs implement backoff smoothing in
+hardware" — connects Track T to classical n-gram smoothing theory.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

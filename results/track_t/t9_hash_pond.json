@@ -1,0 +1,10 @@
+{
+  "table_entries": 302597,
+  "build_repeats": 684539,
+  "build_mismatch_frac": 0.0,
+  "val_coverage": 0.7194,
+  "bit_identical_frac": 1.0,
+  "max_abs_state_diff": 0.0,
+  "bpc_dynamics_on_hits": 2.9065,
+  "bpc_lookup_on_hits": 2.9065
+}
