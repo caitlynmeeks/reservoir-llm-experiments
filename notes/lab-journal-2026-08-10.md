@@ -604,6 +604,63 @@ its own registration).
   0.657 — fails the tree gates identically to 4-bit. "No tree" stands
   on full-precision weights.
 
+**CALIBRATION LEDGER (meta-finding, chat-Fable's sentence, logged
+verbatim):** the ordinal record was 5-for-5 *inside pond physics* and
+is 0-for-2 *across the substrate boundary* — the L1 reversal and the
+triptych bump both died from importing fading-memory intuitions into a
+prediction-trained system. **Substrate-independence failed for our
+priors before it failed for anything else.**
+
+**Corrected Moran (chat-Fable, adopted):** the naive ln27/ln(1/ρ)
+assumes all digits equally used and freely combined; the measure's
+dimension is entropy-rate-over-forgetting, d ≈ h/ln(1/ρ) with h in
+nats — **the pond's fractal dimension is the entropy rate of English
+divided by the log of the forgetting rate; the geometry is carved by
+the language, not the alphabet.** This retroactively explains the
+pond's measured ~1.5 at ρ=0.6 (h ≈ 1.0–1.4 nats ⇒ d ≈ 2.0–2.8,
+minus finite-sample low bias).
+
+**Two PRE-REGISTRATIONS (before running, existing data):**
+- **Triptych, common conditioning:** recompute all three partials per
+  layer with the union control set (each metric | the other two +
+  dpos). The "NOW was never ahead, not even at the embedding" claim is
+  licensed only if common-conditioned NOW < NEXT at L1.
+- **The h-slope bet:** wide-window D across dump cells ρ ∈ {0.2, 0.3,
+  0.4, 0.5, 0.6} is linear through the origin in 1/ln(1/ρ). ORDINAL:
+  D rises with ρ (we win). QUANTITATIVE: the slope lands in
+  h ∈ [1.0, 1.4] nats/char (history says we lose, but this formula
+  has the right physics in it — the most informative quantitative bet
+  on the books). ρ=0.95 reported as ceiling row only.
+
+**H-SLOPE VERDICT: ordinal WIN, quantitative out-of-band with a
+mechanism.** Origin slope h = 0.833 nats (band [1.0, 1.4]); implied h
+per cell declines smoothly as D grows (0.998 → 0.767 across ρ =
+0.2 → 0.6) — the signature of the estimator's dimension-dependent low
+bias — and the least-biased cell (ρ=0.2) reads h = 0.998 nats, on the
+band's floor and in Shannon's neighborhood. The corrected-Moran
+physics stands; the estimator owes the difference.
+`results/track_u/u5d_entropy_slope.json`
+
+**COMMON-CONDITIONED TRIPTYCH VERDICT:** with one conditioning set
+(each metric | other two + dpos): PAST collapses to ~0.03 at every
+layer (its residual was mostly the current token — the luggage was
+lighter than we thought). At L1: FUTURE +0.152 > NOW +0.116 — **the
+future leads from the very first layer; licensed.** At L4: NOW +0.115
+> FUTURE +0.068 — the ONLY layer where the present outranks the
+future, which resolves the L4 dip and resurrects the construction-zone
+story at exactly the layer where its unequal-conditioning version
+died. The arc, final form: future-leaning at the embedding,
+present-centered once (L4), then future-dominant with depth.
+`results/exp01/triptych_common.json`
+
+**Part II centerpiece framing (adopted):** a ~1.5-dimensional fractal
+tree that files by the past vs. an ~8-dimensional smooth manifold that
+files by the future, the present decaying into luggage between them.
+**The pond remembers; the Llama anticipates.** Note also: both
+cophenetic runs landed marginally BELOW their nulls (0.684/0.687,
+0.647/0.657) — not weak hierarchy; zero hierarchy, twice, on solid
+weights.
+
 **Optimizer hygiene, codified (chat-Fable):** any run whose val
 worsens by > 0.5 bpc in one epoch AUTO-VOIDS, verdicts unread;
 gradient clipping (global norm 1.0) added to LogisticReadout alongside

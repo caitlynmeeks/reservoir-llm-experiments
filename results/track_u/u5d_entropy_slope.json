@@ -1,0 +1,47 @@
+{
+  "cells": {
+    "0.2": {
+      "D": 0.62,
+      "x_inv_ln": 0.621,
+      "implied_h_nats": 0.998,
+      "ceiling_row": false
+    },
+    "0.3": {
+      "D": 0.792,
+      "x_inv_ln": 0.831,
+      "implied_h_nats": 0.953,
+      "ceiling_row": false
+    },
+    "0.4": {
+      "D": 0.985,
+      "x_inv_ln": 1.091,
+      "implied_h_nats": 0.903,
+      "ceiling_row": false
+    },
+    "0.5": {
+      "D": 1.218,
+      "x_inv_ln": 1.443,
+      "implied_h_nats": 0.844,
+      "ceiling_row": false
+    },
+    "0.6": {
+      "D": 1.501,
+      "x_inv_ln": 1.958,
+      "implied_h_nats": 0.767,
+      "ceiling_row": false
+    },
+    "0.95": {
+      "D": 3.187,
+      "x_inv_ln": 19.496,
+      "implied_h_nats": 0.163,
+      "ceiling_row": true
+    }
+  },
+  "origin_slope_h_nats": 0.833,
+  "fit_rms": 0.093,
+  "registered_band": [
+    1.0,
+    1.4
+  ],
+  "verdict": "OUT OF BAND"
+}
