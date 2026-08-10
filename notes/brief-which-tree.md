@@ -74,6 +74,44 @@ tree (low cophenetic) → geometry genuinely non-hierarchical.
   NOT explain ≥ (threshold)% of whatever faithfulness_s survives, or
   outcome (b) is declared and the headline claim is withheld.
 
+## Round 2 — chat-Fable's amendments, AGREED (final design)
+
+1. **d_p circularity broken.** The last layer's logits are a linear
+   projection of its state, so faithfulness_p rises mechanically with
+   depth. Fixes adopted: (a) last layer excluded from all headline
+   claims, reported only as the mechanical ceiling; (b) primary
+   prediction metric is **d_p^ext** = JSD between empirical 5-gram
+   next-char distributions at the two positions (tables recomputed from
+   our n-gram machinery); the model's own distribution (marginalized to
+   next-char by summing token probs grouped by first character) becomes
+   d_p^self, a depth-consistency diagnostic only. Headlines quote
+   d_p^ext.
+2. **Cosine is the Llama's native ruler** (RMSNorm ⇒ direction carries
+   information): cosine primary for Llama faithfulness, Euclidean as
+   check. Ponds stay Euclidean-primary (amplitude is meaningful — the
+   masonry lesson).
+3. **Position confound (RoPE):** pairs sampled position-matched within
+   a window, and |i−j| partialed out alongside d_s and d_p. Control
+   (iv). Layers: {1, 4, 8, 12, 14} with 15 as the ceiling row.
+4. **Budget:** natural text fully; random-token drive only calibrates
+   the d_s machinery.
+
+**Pre-registered numbers (agreed):**
+- PR-A: mid layers, partial_p − partial_s ≥ 0.10 with 1,000-resample
+  bootstrap CI excluding zero; layer 1 reversed with the same margin.
+- PR-B: over ≥5 layers, Spearman(layer, faithfulness_s) ≤ −0.8;
+  faithfulness_p non-decreasing within −0.02 tolerance.
+- PR-C: two gates, both required: cophenetic ≥ 0.90 absolute AND
+  ≥ position-shuffled empirical null + 0.15. 0.75–0.90 = "hierarchical
+  but loose"; < 0.75 = outcome (d).
+- PR-D: deep-suffix share = partial(state, d_s | d_s^k≤3) / raw
+  faithfulness_s; past-tree-beyond-working-set claimed only if
+  share ≥ 0.30 (floor 0.25, arguable to 0.40).
+- PR-E: pond natural-text dumps through identical partials; ordinal:
+  pond partial_p ≈ 0 once suffix is controlled. Money figure: the
+  (partial_s, partial_p) plane — pond in the past corner, Llama's
+  layers tracing a path.
+
 ## Honesty flag to carry back (scoreboard discipline)
 
 At N=50k the trainable readout is (50k+1)×27 ≈ **1.35M params — more

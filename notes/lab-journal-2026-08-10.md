@@ -497,6 +497,17 @@ cleanly nested clusters. Finding 5's strong form unaffected.
 `results/track_u/u6_linear_null.json`; esn.py gained an `activation`
 option ("tanh" | "linear").
 
+## Params-matched duel (chat-Fable's weaponized honesty flag) — PRE-REGISTERED
+
+N=20k readout = (20k+1)×27 ≈ 540k trainable params — the 4-gram's own
+weight class (531k). Protocol: ρ ∈ {0.95, 1.1} at 5M chars, config
+chosen on val, its TEST quoted. Note for the record: at 4M chars the
+val-chosen config (ρ=1.1) tests at 2.3907 vs the 4-gram's 2.392 — a
+dead heat; ρ=0.95's cleaner 2.359 was not val-chosen and is not
+quotable. **PR: at 5M chars the val-chosen config's test bpc < 2.37**
+(a ≥0.02 margin — matched parameters, no feature training, same data
+budget, better bpc).
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
