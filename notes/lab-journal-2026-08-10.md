@@ -810,6 +810,17 @@ column: 5-gram@20M 2.015 < 5-gram@5M 2.095 < POND 2.184 < 4-gram@20M
 the weakest 5-gram by 0.09. Next honest step recorded, no run queued.
 `results/track_p/p1_acid_test_N20000_T20M_stride4.json`
 
+**FENCE ASSAULT II — PRE-REGISTERED (before launch):** N=20k, 80M
+train chars, stride 16 (5M rows, RAM-constant), lr=1e-3. Protocol
+change, registered here: ρ fixed at 0.95 — chosen by the two standing
+val decisions at this N (5M and 20M both chose 0.95), not by peeking;
+single run, ~2.5–3h. Anchors: same-data 5-gram@80M = **test 1.984**
+(the fence, taller again); 5-gram@20M (2.015) and @5M (2.095) as
+history. ORDINAL: new champion (val < 2.0983). QUANTITATIVE (the
+order: "take the fence"): test < 1.984. Extrapolation says ~2.14 and
+the fence survives; the lab's quantitative record says trust nothing,
+including that.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
