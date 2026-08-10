@@ -1,0 +1,32 @@
+{
+  "-0.4": {
+    "kstar": 3,
+    "kstar_times_abs_lambda": 1.2,
+    "n_distinct_states": 2684
+  },
+  "-0.3": {
+    "kstar": 4,
+    "kstar_times_abs_lambda": 1.2,
+    "n_distinct_states": 2850
+  },
+  "-0.2": {
+    "kstar": 4,
+    "kstar_times_abs_lambda": 0.8,
+    "n_distinct_states": 7013
+  },
+  "-0.1": {
+    "kstar": 6,
+    "kstar_times_abs_lambda": 0.6,
+    "n_distinct_states": 11669
+  },
+  "-0.05": {
+    "kstar": 9,
+    "kstar_times_abs_lambda": 0.45,
+    "n_distinct_states": 15777
+  },
+  "-0.02": {
+    "kstar": null,
+    "kstar_times_abs_lambda": null,
+    "n_distinct_states": 19206
+  }
+}

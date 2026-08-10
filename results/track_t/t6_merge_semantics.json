@@ -1,0 +1,35 @@
+{
+  "n_merged": 1003,
+  "n_null": 249,
+  "median_jsd_merged": 0.028324785372304387,
+  "median_jsd_null": 0.03303048007744015,
+  "R": 1.1661334637944665,
+  "mwu_p": 6.501747116294654e-05,
+  "verdict": "arbitrary_collisions",
+  "per_tail": {
+    "1": {
+      "merged": null,
+      "null": null
+    },
+    "2": {
+      "merged": null,
+      "null": null
+    },
+    "3": {
+      "merged": null,
+      "null": null
+    },
+    "4": {
+      "merged": null,
+      "null": null
+    },
+    "5": {
+      "merged": 0.030708595885375646,
+      "null": 0.03303048007744015
+    },
+    "6": {
+      "merged": 0.02316145704491163,
+      "null": null
+    }
+  }
+}

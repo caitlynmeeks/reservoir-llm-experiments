@@ -59,7 +59,9 @@ E1 — experiment 01
       every layer; lag-2 recall declines monotonically with depth
       (0.89 L1 -> 0.56 L15). See journal Finding 7 ("working set, not
       a tape"); probes use per-lag lambda selection on a val split.
-- [ ] E1-T5 k-parity probes (binary token subset) for model + ESNs.
+- [x] E1-T5 — DONE 2026-08-10: run_parity.py. ESN wins every k>=4
+      (H3 exceeded); transformer parity window ~k=5 on binary alphabet;
+      accuracy declines with depth. Journal E1-PR4 verdict.
 
 E2 — experiment 02
 - [x] E2-T1 First real text8 run — DONE 2026-08-09: N=5k defaults gave

@@ -269,6 +269,77 @@ probes on random token sequences," which is exactly what
 reservoir-likeness means. Figure:
 `results/exp01/probe_recall_figures.png` — a working set vs. a tape.
 
+## E1-T5 (k-parity) — PRE-REGISTERED prediction (written before the run)
+
+Setup: binary sequences over 2 single-token words, B=32 × T=512,
+washout 64; parity of the last k bits (k = 2..8), ridge probe with
+per-k λ selection on a validation slice, sign readout, test-split
+accuracy; chance = 0.5. Same layers and ESN controls as Finding 7.
+
+- **E1-PR4 (aggressive form of SPEC H3):** the ESN does not merely
+  close the parity gap — it wins outright. Transformer layers exceed
+  0.55 only for k ≤ 3 (the working-set window); for k ≥ 4 every layer
+  sits within noise of chance. ESN N=8192 holds ≥ 0.9 through k = 6.
+  Rationale: parity of the last k bits requires simultaneously held,
+  nonlinearly mixed lag information — precisely what a fading tape has
+  and a retrieval architecture's *state* does not.
+
+**E1-PR4 VERDICT (parity): ordinal claim CONFIRMED, both quantitative
+thresholds missed.** ESN-4D beats the best transformer layer at every
+k ≥ 4 (1.00/0.97 at k=4, 0.96/0.72 at k=5, 0.78/0.55 at k=6, 0.58/0.51
+at k=7) — SPEC H3 exceeded: the reservoir doesn't close the nonlinear
+gap, it owns it. But the transformer's window was wider than
+pre-registered (above 0.55 through k=5; the binary alphabet is a
+different attention regime than 64-token recall — small vocab, heavy
+repetition), and ESN-4D fell short of the ≥0.9-through-k=6 claim
+(0.78). Depth trend replicates a third time: parity accuracy declines
+monotonically with layer (k=4: 0.97 at L3 → 0.74 at L15).
+`results/exp01/parity_Llama-3.2-1B-Instruct-4bit_B32_T512_seed0.json`
+
+## T6 (merge semantics) — PRE-REGISTERED design and thresholds
+(written before any distribution was computed)
+
+Question (chat-Fable): are the tropical automaton's merged suffix
+classes "smart" (predictive twins — approximating the task's causal
+states, ε-machine-style) or "dumb" (arbitrary collisions)?
+
+Design. Universe: multi-sample, determined k=7 suffix classes from the
+tropical champion dump. MERGED pairs: classes sharing a state. NULL
+pairs: classes NOT sharing a state, matched to the merged pairs on
+(a) shared trailing-substring length — the critical confound, since
+next-char distributions are dominated by recent characters and merged
+pairs share long tails — and (b) context frequency bin (log2 of the
+rarer context's corpus count). Per pair: Jensen–Shannon divergence
+between corpus next-char distributions conditioned on the full 7-char
+context (train slice, 5M chars; add-α smoothing α=0.1; both contexts
+must have ≥20 occurrences or the pair is dropped).
+
+Thresholds (R = median JSD_null / median JSD_merged, Mann–Whitney
+p < 0.01 required for either positive verdict):
+- R ≥ 2.0 → merges are predictive twins; "partial ε-machine found by
+  physics" is claimable.
+- R ≤ 1.25 → merges are arbitrary collisions; quantify their bpc cost
+  instead.
+- Between → partial; report the number without the lineage claim.
+
+**T6 VERDICT: arbitrary_collisions (R = 1.17; MWU p = 6.5e-05).**
+Median JSD 0.028 bits (merged) vs 0.033 (tail-matched null) — both
+tiny. The merge criterion is structural, not distributional: sharing a
+long tail already makes contexts predictive near-twins, and the
+dynamics adds only a marginal (~17%, statistically real) refinement
+beyond that. The merges are FREE, not clairvoyant: their bpc cost is
+negligible, but "physics approximates causal states" is NOT claimable.
+Note the counterfactual: without the pre-registered tail-matched null,
+uncontrolled random pairs (JSD ~ tenths of bits) would have produced
+R ≈ 10 and the night's biggest overclaim. Limitation: only 249 null
+pairs matched (thin tail/frequency cells).
+`results/track_t/t6_merge_semantics.json`
+
+**k*(λ) sweep — PRE-REGISTERED form (before running):** determinism
+depth k*(λ) (smallest k with determinism ≥ 0.99) scales like 1/|λ|,
+i.e. k*·|λ| ≈ constant across λ; measured point so far: k*=7 at
+λ=−0.1.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
