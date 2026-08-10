@@ -52,6 +52,8 @@ class LogisticReadout:
         beta1, beta2, eps = 0.9, 0.999, 1e-8
         t_adam = 0
         best_nll, best_W, bad = np.inf, self.W.copy(), 0
+        prev_nll = None
+        self.voided = False
         n = X.shape[0]
         for epoch in range(self.max_epochs):
             order = self.rng.permutation(n)
@@ -68,6 +70,9 @@ class LogisticReadout:
                 g = np.empty_like(self.W)
                 g[:-1] = xb.T @ p
                 g[-1] = p.sum(axis=0)
+                gn = float(np.linalg.norm(g))
+                if gn > 1.0:                     # global-norm clip (hygiene rule)
+                    g *= 1.0 / gn
                 t_adam += 1
                 m = beta1 * m + (1 - beta1) * g
                 v = beta2 * v + (1 - beta2) * g * g
@@ -78,6 +83,14 @@ class LogisticReadout:
             if verbose:
                 print(f"  epoch {epoch + 1}: val nll {val_nll:.4f} nats "
                       f"({val_nll / np.log(2):.4f} bpc)", flush=True)
+            if prev_nll is not None and (val_nll - prev_nll) > 0.5 * np.log(2):
+                # AUTO-VOID (house rule): val worsened >0.5 bpc in one epoch —
+                # optimizer divergence; the run's verdict must not be read.
+                self.voided = True
+                print("  AUTO-VOID: val worsened >0.5 bpc in one epoch "
+                      "(optimizer divergence)", flush=True)
+                break
+            prev_nll = val_nll
             if val_nll < best_nll - 1e-5:
                 best_nll, best_W, bad = val_nll, self.W.copy(), 0
             else:

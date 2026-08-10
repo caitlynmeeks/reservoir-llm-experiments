@@ -1,0 +1,38 @@
+{
+  "config": {
+    "n_reservoir": 20000,
+    "rhos": [
+      0.95,
+      1.1
+    ],
+    "leak": 1.0,
+    "train_chars": 5000000,
+    "eval_chars": 200000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0,
+    "fp16_buffer": true,
+    "tag": "_N20000_T5M_duel",
+    "lr": 0.003
+  },
+  "rows": [
+    {
+      "rho": 0.95,
+      "logistic_val_bpc": 2.4206,
+      "logistic_test_bpc": 2.4703,
+      "ridge_val_bpc": NaN,
+      "wall_s": 555.3
+    },
+    {
+      "rho": 1.1,
+      "logistic_val_bpc": 2.3908,
+      "logistic_test_bpc": 2.4409,
+      "ridge_val_bpc": NaN,
+      "wall_s": 553.5
+    }
+  ],
+  "best_rho": {
+    "ridge": 0.95,
+    "logistic": 1.1
+  }
+}

@@ -508,6 +508,14 @@ quotable. **PR: at 5M chars the val-chosen config's test bpc < 2.37**
 (a ≥0.02 margin — matched parameters, no feature training, same data
 budget, better bpc).
 
+*Procedural note:* first attempt VOID — Adam at lr=3e-3 diverged at
+epoch 3 in both cells (val 2.42→5.21 bpc in one epoch; early stopping
+salvaged epoch-2 weights, yielding meaningless 2.39/2.44). Same
+instability class as the N=50k blow-up; stochastic at N=20k (the 4M
+run survived on batch-order luck). Rerun at lr=1e-3; the
+pre-registration is unchanged — this is optimizer hygiene, diagnosed
+from the epoch traces before any verdict was read.
+
 ## Finding 8 — The Llama grows no tree: a future manifold (which-tree run)
 
 Verdicts against the brief's pre-registered thresholds:
@@ -531,20 +539,46 @@ Verdicts against the brief's pre-registered thresholds:
 - **PR-E (pond control): CONFIRMED.** Pond partial_s +0.442,
   partial_p +0.062 — the past corner, as registered.
 
-**The finding:** the pond and the Llama occupy orthogonal corners of
-the past–future plane (`results/exp01/which_tree_plane.png`). The
-reservoir organizes its states by where the text has BEEN (a suffix
-tree, forced by fading memory); the trained transformer organizes by
-where the text is GOING (faithfulness to the empirical next-char
-distribution, strengthening with depth to L12), and its geometry is
-not hierarchical at all — a smooth predictive manifold, not a tree.
-Finding 7's "retrieval without storage," now photographed: the state
-does not encode the past because it is entirely spent on the future.
-Universality (Finding 5) is hereby SCOPED: substrate-independence
-holds across fading-memory systems; training for prediction escapes
-the class entirely. Caveats: one model (1B, 4-bit), natural-text
-drive, position-matched pairs |Δt| ≤ 64, linear-rank partials,
-d_p^ext at 5-gram order.
+**The finding (wording per chat-Fable, adopted):** Fading memory files
+states by the past — the suffix tree is that filing system, and it is
+substrate-independent because forgetting forces it. Prediction
+training files states by the future, at every depth we measured,
+embedding included, and its filing system is not a tree: **the recent
+past stays readable but never organizes the geometry — the working
+set is carried, not filed.** (Probes measure what is extractable;
+faithfulness measures what organizes the metric.) F5 scopes to
+fading-memory systems; the transformer isn't an exception to the law
+— it is outside its jurisdiction. "Manifold" is HELD pending a
+dimension measurement (registered below); until then: predictive
+geometry. The pond–Llama figure:
+`results/exp01/which_tree_plane.png`. Caveats: one model (1B, 4-bit —
+quantization check registered below), natural-text drive,
+|Δt| ≤ 64 position matching, rank-OLS partials, d_p^ext at 5-gram
+order (L8's 0.095 stands as "cleared zero, missed meaningful" under
+the registered ruler; any higher-order d_p is a new instrument with
+its own registration).
+
+**Follow-ups — PRE-REGISTERED (before running):**
+- **F8-a (triptych):** add partial faithfulness to CURRENT-token
+  identity per layer (controlling d_s, d_pext, dpos). ORDINAL: it
+  peaks at the d_p dip (L4) — the arc is past-less → present-busy →
+  future-keyed, and the dip is the state being about *now*.
+- **F8-b (earn "manifold"):** correlation-dimension estimate of
+  Llama-L12 states (cosine, wide window; also inspect log C(r) for
+  smoothness vs. stairs). ORDINAL: intrinsic dimension well above the
+  pond's Moran-scale values, and the curve is smooth (no quantized
+  scales) — or interestingly not.
+- **F8-c (quantization exoneration):** recompute L12 cophenetic on the
+  SAME positions with a bf16 (unquantized) model. Registered gates:
+  apply PR-C unchanged — if bf16 cophenetic ≥ 0.90 and ≥ null + 0.15,
+  quantization is indicted and "no tree" is withdrawn pending; if it
+  stays < 0.75, exonerated.
+
+**Optimizer hygiene, codified (chat-Fable):** any run whose val
+worsens by > 0.5 bpc in one epoch AUTO-VOIDS, verdicts unread;
+gradient clipping (global norm 1.0) added to LogisticReadout alongside
+the lr=1e-3 retry policy. The duel line stays at 2.37, test column,
+no rounding mercy.
 
 ## Open threads (in rough order)
 

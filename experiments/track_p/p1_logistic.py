@@ -95,6 +95,9 @@ def main():
         lr = LogisticReadout(a.n_reservoir, V, lr=a.lr, max_epochs=20,
                              seed=a.seed)
         lr.fit(Xtr, ytr, Xva, yva)
+        if getattr(lr, "voided", False):
+            print(f"rho={rho}: RUN VOIDED (divergence) — verdict unread",
+                  flush=True)
         val_bpc, test_bpc = lr.bpc(Xva, yva), lr.bpc(Xte, yte)
 
         ridge_file = os.path.join(
@@ -105,7 +108,8 @@ def main():
                 ridge_bpc = json.load(f)["val_bpc"]
         except FileNotFoundError:
             ridge_bpc = float("nan")
-        rows.append({"rho": rho, "logistic_val_bpc": round(val_bpc, 4),
+        rows.append({"rho": rho, "voided": bool(getattr(lr, "voided", False)),
+                     "logistic_val_bpc": round(val_bpc, 4),
                      "logistic_test_bpc": round(test_bpc, 4),
                      "ridge_val_bpc": round(ridge_bpc, 4),
                      "wall_s": round(time.time() - t0, 1)})
