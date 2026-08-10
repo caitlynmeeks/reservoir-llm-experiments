@@ -587,6 +587,23 @@ its own registration).
   quantization is indicted and "no tree" is withdrawn pending; if it
   stays < 0.75, exonerated.
 
+**F8 FOLLOW-UP VERDICTS:**
+- **F8-a: falsified as stated, better story found.** partial_now does
+  NOT peak at L4 — it is flat-highest early (L1 +0.116, L4 +0.115,
+  statistically tied) and declines monotonically (L8 +0.108, L12
+  +0.062, L14 +0.045). The revised arc: **the state trades NOW for
+  NEXT as depth increases** — present-signal decays while
+  future-signal grows. The L4 future-dip stays unexplained (no
+  present-bump there); open question for a second model.
+- **F8-b: ordinal CONFIRMED — "manifold" provisionally earned.** L12
+  correlation dimension 7.82 under the same wide-window estimator that
+  gave the pond ~1.5, with a SMOOTH log C(r) (fit residual 0.205 bits;
+  no staircase). Finite, smooth, un-quantized scales: predictive
+  manifold is now a licensed noun, with estimator caveats.
+- **F8-c: quantization EXONERATED.** bf16 L12 cophenetic 0.647 vs null
+  0.657 — fails the tree gates identically to 4-bit. "No tree" stands
+  on full-precision weights.
+
 **Optimizer hygiene, codified (chat-Fable):** any run whose val
 worsens by > 0.5 bpc in one epoch AUTO-VOIDS, verdicts unread;
 gradient clipping (global norm 1.0) added to LogisticReadout alongside
