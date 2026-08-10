@@ -453,6 +453,50 @@ uniform symbols instead of text8):
   The staircase is a ruler: treads measure the dynamics, drops measure
   the drive. `results/track_u/u5c_uniform_control.png`
 
+**MORNING CHAIN 2 VERDICTS:** N=50k at lr=3e-4: divergence cured; val
+2.363 / 2.268 / **2.2306** at ρ = 0.8 / 0.95 / 1.1 — new overall
+champion, on 1M chars, landing just BELOW the registered [2.25, 2.45]
+band (miss #8, favorable). N=20k @ 4M chars: **2.2986** — under the
+pre-registered 2.30 threshold: the flattening was data ceiling, not
+reservoir saturation. Argmin ρ = 1.1 at both 20k and 50k: firmly
+supercritical and still drifting right.
+
+**MORNING CHAIN 3 — PRE-REGISTERED (before launch):**
+- N=50k, ρ=1.25, 1M chars: PREDICT interior optimum — 1.25 comes back
+  WORSE than 1.1 (the drift has a ceiling; supercritical mixing
+  eventually destroys usable structure even for a rich readout).
+- N=50k, ρ=1.1, 2M chars: PREDICT val ≤ 2.18 (data scaling continues;
+  the 5-gram fence at 2.06 val comes into sight but does not fall
+  tonight).
+
+**CHAIN 3 VERDICTS: 2/2.** ρ=1.25 @ 50k: 2.2636 > 2.2306 — interior
+optimum CONFIRMED at ρ≈1.1; the drift has a ceiling. 50k @ 2M: val
+2.1742 (registered ≤ 2.18 ✓), test 2.2285 — 5-gram fence (2.095 test)
+in sight, not fallen.
+
+## U6 (linear-pond null) — PRE-REGISTERED (before running)
+
+Identity-activation pond (activation an option in esn.py), N=1k,
+ρ=0.6, leak=1 — same knobs as the t3 tanh control — through the U1/U2
+instruments. **PREDICT the deflationary outcome:** the linear pond
+grows the same tree (faithfulness within ±0.05 of tanh's +0.448;
+cophenetic ≥ 0.95). Recency geometry is linear-algebraic; tanh is not
+required for tree-ness. Either way Finding 5's strong form survives —
+it rests on co-location of tuned optima across algebras, not on
+tree-ness, and this null turns "some of it is generic" into a
+measured baseline.
+
+**U6 VERDICT: deflationary outcome confirmed, with a residual.**
+Linear-pond faithfulness 0.4484 — identical to tanh's 0.448 to three
+decimals (prediction dead-center): the suffix-correlation structure is
+fully linear-algebraic. Cophenetic 0.9459, missing the registered
+≥0.95 bar by 0.004 (near-miss #9): nonlinearity contributes a real,
+small tree-CRISPNESS gradient — 0.946 (linear) → 0.970 (tropical) →
+0.985 (tanh) — saturation sharpens soft recency correlation into
+cleanly nested clusters. Finding 5's strong form unaffected.
+`results/track_u/u6_linear_null.json`; esn.py gained an `activation`
+option ("tanh" | "linear").
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

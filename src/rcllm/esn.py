@@ -28,12 +28,16 @@ class ESN:
         bias_scale: float = 0.2,
         seed: int = 0,
         dtype=np.float32,
+        activation: str = "tanh",
     ):
         rng = np.random.default_rng(seed)
         self.N = n_reservoir
         self.K = n_inputs
         self.leak = np.asarray(leak_rate, dtype=dtype)
         self.dtype = dtype
+        if activation not in ("tanh", "linear"):
+            raise ValueError(f"unknown activation {activation!r}")
+        self.act = np.tanh if activation == "tanh" else (lambda z: z)
 
         density = min(1.0, fanin / n_reservoir)
         W = sp.random(
@@ -73,7 +77,7 @@ class ESN:
     def step_batch(self, X: np.ndarray, U_t: np.ndarray) -> np.ndarray:
         """One update for S parallel sequences. X: (S, N), U_t: (S, K)."""
         pre = (self.W @ X.T).T + U_t @ self.Win.T + self.b
-        return (1.0 - self.leak) * X + self.leak * np.tanh(pre)
+        return (1.0 - self.leak) * X + self.leak * self.act(pre)
 
     def run_batch(
         self,

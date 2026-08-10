@@ -1,0 +1,14 @@
+{
+  "linear": {
+    "faithfulness": 0.4484,
+    "cophenetic": 0.9459
+  },
+  "tanh_reference": {
+    "faithfulness": 0.448,
+    "cophenetic": 0.985
+  },
+  "tropical_reference": {
+    "faithfulness": 0.454,
+    "cophenetic": 0.97
+  }
+}
