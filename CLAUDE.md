@@ -50,12 +50,15 @@ E1 — experiment 01
       Instruct-4bit (16 layers, D=2048); fixed embedding_table (was
       returning bit-packed quantized weights); added guard against
       mixed-attention-type models.
-- [ ] E1-T2 Implement `build_single_token_subset(tokenizer, M)` and
-      replace the placeholder id range in `run_probe.py`.
-- [ ] E1-T3 Plots: (layer × lag) accuracy heatmap + lag curves vs. both
-      ESN controls; save PNG + JSON to `results/exp01/`.
-- [ ] E1-T4 Layer sweep on the chosen model (every 2nd layer), B=32,
-      T=512; write up which depth is most reservoir-like.
+- [x] E1-T2 — DONE 2026-08-10: build_single_token_subset in
+      activations.py (64 space-prefixed common words, all single-token).
+- [x] E1-T3 — DONE 2026-08-10: make_figures.py; heatmap + curves in
+      results/exp01/probe_recall_figures.png (JSON alongside).
+- [x] E1-T4 — DONE 2026-08-10: every-2nd-layer sweep, B=32, T=512.
+      Answer: NO depth is reservoir-like. ~3-token positional window at
+      every layer; lag-2 recall declines monotonically with depth
+      (0.89 L1 -> 0.56 L15). See journal Finding 7 ("working set, not
+      a tape"); probes use per-lag lambda selection on a val split.
 - [ ] E1-T5 k-parity probes (binary token subset) for model + ESNs.
 
 E2 — experiment 02

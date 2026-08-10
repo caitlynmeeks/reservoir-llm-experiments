@@ -1,10 +1,15 @@
 """Experiment 01 runner: probe a frozen LLM's residual stream like a reservoir.
 
-Runs end-to-end for the ESN control on any machine; the transformer path
-needs mlx-lm on the Mac (see SPEC.md and CLAUDE.md task list).
+For each kept layer (and for ESN controls at N=D and N=4D fed the model's
+own dequantized embeddings), fits ONE joint ridge from states to the
+one-hot token identity at every lag k=1..k_max (targets stacked — ridge
+is separable across targets, so this equals the per-lag fit at ~k_max×
+the speed), and reports argmax accuracy per lag on held-out timesteps.
+Each system is probed twice: raw states and unit-L2-normalized states
+(the projectivity ablation, PUNCHLIST P2 / journal E1-PR3).
 
-Usage (on the Mac):
-    python run_probe.py --model <mlx-community-repo-id> --layers 0 4 8 12 ...
+Usage (Mac):
+    python run_probe.py --model mlx-community/Llama-3.2-1B-Instruct-4bit
     python run_probe.py --esn-only          # control path, runs anywhere
 """
 
@@ -19,42 +24,64 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 from rcllm import ESN, ChunkedRidge  # noqa: E402
-from rcllm.tasks import parity_accuracy_from_states  # noqa: E402
 
 RESULTS = os.path.join(os.path.dirname(__file__), "..", "..", "results", "exp01")
 
 
+LAM_GRID = (1e-2, 1.0, 1e2, 1e4)
+
+
 def token_recall_probe(states: np.ndarray, ids: np.ndarray, m_vocab: int,
-                       k_max: int = 64, train_frac: float = 0.7, lam: float = 1e-2):
-    """states: (B, T, N); ids: (B, T) values in [0, m_vocab). Flattens batch,
-    probes one-hot identity of token t-k. Returns accuracy per lag (k_max,)."""
+                       k_max: int = 64) -> np.ndarray:
+    """states: (B, T, N); ids: (B, T) in [0, m_vocab).
+
+    One normal-equation accumulation, one Cholesky per lambda in LAM_GRID;
+    lambda chosen PER LAG on a validation slice, accuracy reported on a
+    disjoint test slice (60/20/20 split of timestep rows). Returns test
+    accuracy per lag (k_max,)."""
     B, T, N = states.shape
-    acc = np.zeros(k_max)
     X = states[:, k_max:, :].reshape(-1, N)
-    n_train = int(train_frac * X.shape[0])
+    n = X.shape[0]
+    n_tr, n_va = int(0.6 * n), int(0.2 * n)
+    Y = np.zeros((n, k_max * m_vocab), dtype=np.float32)
+    targets = {}
     for k in range(1, k_max + 1):
-        target_ids = ids[:, k_max - k : T - k].reshape(-1)
-        Y = np.eye(m_vocab, dtype=np.float32)[target_ids]
-        reg = ChunkedRidge(N, m_vocab).partial_fit(X[:n_train], Y[:n_train])
-        reg.solve(lam)
-        pred = reg.predict(X[n_train:]).argmax(axis=1)
-        acc[k - 1] = float((pred == target_ids[n_train:]).mean())
+        tgt = ids[:, k_max - k : T - k].reshape(-1)
+        targets[k] = tgt
+        Y[np.arange(n), (k - 1) * m_vocab + tgt] = 1.0
+    reg = ChunkedRidge(N, k_max * m_vocab).partial_fit(X[:n_tr], Y[:n_tr])
+    acc = np.zeros(k_max)
+    best_va = np.full(k_max, -1.0)
+    for lam in LAM_GRID:
+        beta = reg.solve(lam)
+        pred_va = reg.predict(X[n_tr : n_tr + n_va], beta)
+        pred_te = reg.predict(X[n_tr + n_va :], beta)
+        for k in range(1, k_max + 1):
+            sl = slice((k - 1) * m_vocab, k * m_vocab)
+            va = float((pred_va[:, sl].argmax(1)
+                        == targets[k][n_tr : n_tr + n_va]).mean())
+            if va > best_va[k - 1]:
+                best_va[k - 1] = va
+                acc[k - 1] = float((pred_te[:, sl].argmax(1)
+                                    == targets[k][n_tr + n_va :]).mean())
     return acc
 
 
-def run_esn_control(ids: np.ndarray, emb: np.ndarray, n_reservoir: int,
-                    washout: int, seed: int = 0, **esn_kw):
-    """ids: (B, T) subset-relative ids; emb: (M, D_in) input vectors per id."""
-    esn = ESN(n_inputs=emb.shape[1], n_reservoir=n_reservoir, seed=seed, **esn_kw)
-    U = emb[ids]                                   # (B, T, D_in)
-    states, _ = esn.run_batch(U, washout=washout)
-    return states, ids[:, washout:]
+def unit_norm(states: np.ndarray) -> np.ndarray:
+    return states / (np.linalg.norm(states, axis=-1, keepdims=True) + 1e-8)
+
+
+def probe_both(states: np.ndarray, ids: np.ndarray, m: int, k_max: int) -> dict:
+    return {"raw": token_recall_probe(states, ids, m, k_max=k_max).tolist(),
+            "norm": token_recall_probe(unit_norm(states), ids, m,
+                                       k_max=k_max).tolist()}
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default=None, help="mlx-community repo id (Mac only)")
-    ap.add_argument("--layers", type=int, nargs="*", default=None)
+    ap.add_argument("--model", default="mlx-community/Llama-3.2-1B-Instruct-4bit")
+    ap.add_argument("--layers", type=int, nargs="*", default=None,
+                    help="default: every 2nd layer")
     ap.add_argument("--esn-only", action="store_true")
     ap.add_argument("--m-vocab", type=int, default=64)
     ap.add_argument("--batch", type=int, default=32)
@@ -67,42 +94,49 @@ def main():
     rng = np.random.default_rng(args.seed)
     results: dict = {"config": vars(args)}
 
-    # --- inputs: random ids in [0, M). Mapping to real token ids happens
-    # only on the transformer path (TODO E1-T2: build single-token subset).
     ids = rng.integers(0, args.m_vocab, size=(args.batch, args.seq_len))
+    kept = ids[:, args.washout :]
 
     if not args.esn_only:
-        from rcllm.activations import load_model, collect_hidden_states, embedding_table
+        from rcllm.activations import (load_model, collect_hidden_states,
+                                       embedding_table, build_single_token_subset)
         model, tok = load_model(args.model)
-        # TODO(E1-T2): subset_token_ids = build_single_token_subset(tok, args.m_vocab)
-        subset_token_ids = np.arange(1000, 1000 + args.m_vocab)  # placeholder
-        real_ids = subset_token_ids[ids]
-        hs = collect_hidden_states(model, real_ids, layers=args.layers)
-        emb = embedding_table(model)[subset_token_ids]           # (M, D)
-        for layer, h in hs.items():
-            acc = token_recall_probe(h[:, args.washout:, :], ids[:, args.washout:],
-                                     args.m_vocab, k_max=args.k_max)
-            results[f"layer_{layer}"] = acc.tolist()
-            print(f"layer {layer}: acc@lag1={acc[0]:.3f} acc@lag16={acc[15]:.3f}")
+        n_layers = len(model.model.layers)
+        layers = args.layers or list(range(1, n_layers, 2))
+        subset = build_single_token_subset(tok, args.m_vocab)
+        results["subset_token_ids"] = subset.tolist()
+        real_ids = subset[ids]
+        hs = collect_hidden_states(model, real_ids, layers=layers)
+        emb = embedding_table(model)[subset].astype(np.float32)  # (M, D)
         D = emb.shape[1]
+        for layer in layers:
+            h = hs.pop(layer)[:, args.washout :, :]
+            results[f"layer_{layer}"] = probe_both(h, kept, args.m_vocab,
+                                                   args.k_max)
+            r = results[f"layer_{layer}"]
+            print(f"layer {layer:2d}: raw acc@lag8={r['raw'][7]:.3f} "
+                  f"@lag32={r['raw'][31]:.3f}  norm @lag32={r['norm'][31]:.3f}",
+                  flush=True)
     else:
-        # standalone control: random Gaussian "embeddings"
         D = 512
-        emb = rng.standard_normal((args.m_vocab, D)).astype(np.float32) / np.sqrt(D)
+        emb = (rng.standard_normal((args.m_vocab, D)) / np.sqrt(D)).astype(np.float32)
 
     for label, N in [("esn_D", D), ("esn_4D", 4 * D)]:
-        states, kept_ids = run_esn_control(ids, emb.astype(np.float32), N,
-                                           args.washout, seed=args.seed,
-                                           spectral_radius=0.95, leak_rate=0.5)
-        acc = token_recall_probe(states, kept_ids, args.m_vocab, k_max=args.k_max)
-        results[label] = acc.tolist()
-        print(f"{label} (N={N}): acc@lag1={acc[0]:.3f} acc@lag16={acc[15]:.3f}")
+        esn = ESN(n_inputs=D, n_reservoir=N, seed=args.seed,
+                  spectral_radius=0.95, leak_rate=0.5)
+        states, _ = esn.run_batch(emb[ids], washout=args.washout)
+        results[label] = probe_both(states, kept, args.m_vocab, args.k_max)
+        r = results[label]
+        print(f"{label} (N={N}): raw acc@lag8={r['raw'][7]:.3f} "
+              f"@lag32={r['raw'][31]:.3f}  norm @lag32={r['norm'][31]:.3f}",
+              flush=True)
 
-    # TODO(E1-T5): parity probes for both systems via parity_accuracy_from_states
-    # TODO(E1-T3): heatmap + curves (matplotlib) into results/exp01/
-    with open(os.path.join(RESULTS, "probe_results.json"), "w") as f:
+    tag = ("esnonly" if args.esn_only else args.model.split("/")[-1])
+    path = os.path.join(RESULTS, f"probe_{tag}_B{args.batch}_T{args.seq_len}"
+                                 f"_M{args.m_vocab}_seed{args.seed}_lamsel.json")
+    with open(path, "w") as f:
         json.dump(results, f, indent=2)
-    print(f"wrote {RESULTS}/probe_results.json")
+    print(f"wrote {path}")
 
 
 if __name__ == "__main__":

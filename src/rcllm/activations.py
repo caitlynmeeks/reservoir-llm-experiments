@@ -66,6 +66,46 @@ def collect_hidden_states(model, token_ids: np.ndarray, layers: list[int] | None
     return out
 
 
+COMMON_WORDS = [
+    "the", "and", "of", "to", "in", "that", "for", "was", "with", "his",
+    "are", "had", "not", "this", "but", "from", "they", "she", "her", "him",
+    "have", "were", "been", "their", "which", "will", "would", "when", "more",
+    "other", "time", "first", "after", "two", "new", "also", "into", "only",
+    "over", "most", "some", "could", "these", "than", "then", "them", "its",
+    "who", "now", "people", "made", "world", "year", "state", "three",
+    "during", "between", "many", "used", "each", "where", "before", "under",
+    "while", "again", "never", "every", "great", "against", "still", "own",
+    "found", "without", "school", "through", "both", "those", "being",
+    "because", "might", "must", "home", "water", "part", "small", "large",
+    "high", "old", "way", "day", "man", "life", "long", "little", "very",
+    "much", "may", "well", "down", "back", "just", "work", "name", "good",
+]
+
+
+def build_single_token_subset(tokenizer, m: int = 64) -> np.ndarray:
+    """E1-T2: m distinct token ids for common words that tokenize to exactly
+    one id (space-prefixed form preferred — that's the natural mid-sequence
+    form for llama-family BPE). Raises if the word list runs dry."""
+    ids: list[int] = []
+    seen: set[int] = set()
+    bos = getattr(tokenizer, "bos_token_id", None)
+    for w in COMMON_WORDS:
+        for cand in (" " + w, w):
+            try:
+                t = tokenizer.encode(cand, add_special_tokens=False)
+            except TypeError:  # wrapper without the kwarg
+                t = tokenizer.encode(cand)
+                if bos is not None and t and t[0] == bos:
+                    t = t[1:]
+            if len(t) == 1 and t[0] not in seen:
+                seen.add(t[0])
+                ids.append(t[0])
+                break
+        if len(ids) == m:
+            return np.array(ids)
+    raise ValueError(f"only {len(ids)} single-token words found; extend COMMON_WORDS")
+
+
 def embedding_table(model) -> np.ndarray:
     """Token embedding matrix (V, D) as NumPy — used to give the ESN control
     the SAME input representation the transformer sees.

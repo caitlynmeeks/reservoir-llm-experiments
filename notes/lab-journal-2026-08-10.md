@@ -210,6 +210,65 @@ trustworthy without running one extra experiment.
   now enforced by construction.
 - Resumable sweep driver; per-cell JSONs cached and reused.
 
+## Experiment 01 — PRE-REGISTERED predictions (written before any probe ran)
+
+Setup: Llama-3.2-1B-Instruct-4bit (16 layers, D=2048), random sequences
+over a 64-word single-token subset, B=32 × T=512, washout 64; ridge
+probes of token identity at lag k per layer; ESN controls at N=D and
+N=4D fed the model's own (dequantized) embeddings, runner defaults
+(ρ=0.95, leak 0.5).
+
+- **E1-PR1 (depth):** token-recall accuracy vs. layer is an inverted U;
+  the best layer lies in the middle third of the stack (layers 5–10 of
+  16). Early layers under-mix; late layers compress toward next-token
+  features.
+- **E1-PR2 (memory shape):** at the best transformer layer, recall at
+  lag 32 exceeds 80% (attention retrieves; roughly lag-flat), while the
+  matched-D ESN control is below 10% at lag 32 (fading memory; chance
+  = 1/64 ≈ 1.6%). This is Finding 3's mechanism claim — retrieval
+  without storage-crowding — stated as a measurable gap.
+- **E1-PR3 (projectivity, P2):** after normalizing states to unit L2
+  norm, define δ = mean over lags 1..32 of (acc_raw − acc_normalized)
+  at each system's best layer/config. Predict δ_transformer < 0.05
+  (transformer memory lives in directions) and δ_ESN > 0.15 (reservoir
+  memory partly lives in amplitude).
+
+## Finding 7 — The residual stream is a working set, not a tape (E1)
+
+Verdicts on the pre-registered predictions, from the λ-selected probe
+run (three-way split; λ chosen per lag on validation, accuracy reported
+on test; a first run with fixed λ=1e-2 was diagnosed as
+under-regularized — lag-0 decode 1.000 everywhere ruled out alignment
+bugs, and a λ sweep + standardization moved the ESN-4D control from
+0.05 to 0.41 at lag 8 while moving the transformer nowhere):
+
+- **E1-PR1 (inverted-U over depth): FALSIFIED.** Lag-2 recall declines
+  monotonically with depth — 0.89 (L1) → 0.56 (L15). No mid-stack
+  sweet spot; the shallowest layer carries the most positional trace.
+- **E1-PR2 (transformer ≥80% at lag 32; ESN <10%): FALSIFIED,
+  INVERTED.** The frozen Llama's per-position state holds a ~3-token
+  window: lag 1 ≈ 1.00, lag 2 = 0.56–0.89, lag 3 ≈ 0.2–0.3, lag 8 ≈
+  0.03, lag 32 = chance (1/64), at every layer. The ESN controls carry
+  an order of magnitude more: ESN-4D = 0.94 (lag 3), 0.40 (lag 8),
+  0.16 (lag 16). The reservoir out-remembers the transformer state at
+  every lag ≥ 2.
+- **E1-PR3 (projectivity): HALF-FALSIFIED.** δ_transformer ≈ 0.01 ✓ —
+  but δ_ESN ≈ 0.01 as well ✗. Unit-normalization is nearly free for
+  BOTH systems: each stores its memory in directions, not amplitude.
+  The ablation failed to discriminate; "features are directions" is
+  the shared regime.
+
+Interpretation: the transformer does not store lag-indexed history in
+its running state at all beyond ~2–3 tokens. Storage lives at the
+source positions (the KV cache), retrieved by attention on demand —
+the architecture *separates* storage from state, which is precisely
+the mechanism that dodges Finding 3's superposition tax. SPEC
+hypotheses H1/H2 (residual stream as a long-memory reservoir) are
+dead; the honest scope is "as measured by position-independent linear
+probes on random token sequences," which is exactly what
+reservoir-likeness means. Figure:
+`results/exp01/probe_recall_figures.png` — a working set vs. a tape.
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
