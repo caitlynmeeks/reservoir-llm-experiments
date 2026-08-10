@@ -1,0 +1,41 @@
+{
+  "config": {
+    "n_reservoir": 20000,
+    "rhos": [
+      0.95,
+      1.1
+    ],
+    "leak": 1.0,
+    "train_chars": 20000000,
+    "eval_chars": 200000,
+    "segments": 64,
+    "washout": 200,
+    "seed": 0,
+    "fp16_buffer": true,
+    "tag": "_N20000_T20M_stride4",
+    "lr": 0.001,
+    "stride": 4
+  },
+  "rows": [
+    {
+      "rho": 0.95,
+      "voided": false,
+      "logistic_val_bpc": 2.0983,
+      "logistic_test_bpc": 2.1841,
+      "ridge_val_bpc": NaN,
+      "wall_s": 2226.6
+    },
+    {
+      "rho": 1.1,
+      "voided": false,
+      "logistic_val_bpc": 2.1196,
+      "logistic_test_bpc": 2.2095,
+      "ridge_val_bpc": NaN,
+      "wall_s": 2053.5
+    }
+  ],
+  "best_rho": {
+    "ridge": 0.95,
+    "logistic": 0.95
+  }
+}

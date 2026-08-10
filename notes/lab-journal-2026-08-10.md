@@ -799,6 +799,17 @@ the primary, honest comparison). ORDINAL: beats the 20k@5M champion
 (val < 2.1576). QUANTITATIVE (the fence bet, history laughing
 already): test < the same-data 5-gram@20M's test bpc.
 
+**FENCE VERDICT: ordinal CONFIRMED (new champion — val 2.0983 / test
+2.1841, dethroning 2.1576/2.2253; stride-4 diversity worked),
+quantitative LOST (same-data 5-gram@20M fence 2.015 stands by 0.17).**
+Data keeps paying (~0.04 test per 4× stride-diversified); the road to
+the fence needs another ~2 doublings of text (stride 8–16 at 40–80M
+chars, RAM-constant) or a streaming readout. Scoreboard ordering, test
+column: 5-gram@20M 2.015 < 5-gram@5M 2.095 < POND 2.184 < 4-gram@20M
+2.357 — the pond has now beaten every 4-gram configuration and trails
+the weakest 5-gram by 0.09. Next honest step recorded, no run queued.
+`results/track_p/p1_acid_test_N20000_T20M_stride4.json`
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then
