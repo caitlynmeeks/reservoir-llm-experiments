@@ -863,6 +863,22 @@ expectation from row-scaling: lands 2.07–2.12 and the fence survives;
 the lab's quantitative record is 1-for-11 and that one was the hash
 table, so the fence's insurers may price accordingly.
 
+**ASSAULT III FINAL VERDICT: ordinal CONFIRMED (val 2.0374, −0.056
+over the stride champion; test 2.1330, −0.040); THE FENCE STANDS by
+0.149.** Eight epochs, ~19.5h, no voids; plateau reached at epoch 5
+and refined at epoch 7. Honest riders: the val→test gap widened to
++0.096 (best-of-8 selection optimism on val); the expectation band
+(2.07–2.12) missed high by 0.013. THE MEASURED RESULT: with neurons
+(100k probe), text (80M), and now rows (all of them) each saturated in
+turn, the linear/logistic-readout paradigm's ceiling on this corpus at
+N=20k is ≈ 2.13 test bpc. The original 5-gram@5M (2.095) sits 0.038
+away; the same-data fence (1.984) needs a different *kind* of readout
+(attention-style, P3 territory) or feature learning — i.e., leaving
+readout-only land, which is the paradigm's honest boundary, now
+surveyed from inside. Campaign totals: three assaults, three
+champions, fence intact, every constraint named and priced.
+`results/track_p/streaming_N20000_T80M.json`
+
 ## Open threads (in rough order)
 
 1. **I2 readout harness** (Track 0) — any features × any readout; then

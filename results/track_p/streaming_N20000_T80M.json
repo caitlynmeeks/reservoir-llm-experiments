@@ -1,0 +1,21 @@
+{
+  "config": {
+    "n_reservoir": 20000,
+    "rho": 0.95,
+    "leak": 1.0,
+    "train_chars": 80000000,
+    "eval_chars": 200000,
+    "segments": 256,
+    "chunk": 32,
+    "washout": 200,
+    "lr": 0.001,
+    "max_epochs": 8,
+    "patience": 2,
+    "seed": 0,
+    "tag": "_N20000_T80M"
+  },
+  "voided": false,
+  "val_bpc": 2.0374,
+  "test_bpc": 2.133,
+  "trainable_params": 540027
+}
